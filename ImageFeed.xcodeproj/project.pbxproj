@@ -13,6 +13,7 @@
 		5B8CCDDA29503B3F002E601E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B8CCDD829503B3F002E601E /* Main.storyboard */; };
 		5B8CCDDC29503B40002E601E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B8CCDDB29503B40002E601E /* Assets.xcassets */; };
 		5B8CCDDF29503B40002E601E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B8CCDDD29503B40002E601E /* LaunchScreen.storyboard */; };
+		5BB39DF62950A13F009544A2 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB39DF52950A13F009544A2 /* UIColor+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		5B8CCDDB29503B40002E601E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B8CCDDE29503B40002E601E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B8CCDE029503B40002E601E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5BB39DF52950A13F009544A2 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,40 @@
 		5B8CCDD129503B3F002E601E /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
-				5B8CCDD229503B3F002E601E /* AppDelegate.swift */,
-				5B8CCDD429503B3F002E601E /* SceneDelegate.swift */,
+				5BB39DF92950A595009544A2 /* Application */,
 				5B8CCDD629503B3F002E601E /* ViewController.swift */,
+				5BB39DF72950A145009544A2 /* Helpers */,
+				5BB39DF82950A555009544A2 /* Resources */,
 				5B8CCDD829503B3F002E601E /* Main.storyboard */,
-				5B8CCDDB29503B40002E601E /* Assets.xcassets */,
 				5B8CCDDD29503B40002E601E /* LaunchScreen.storyboard */,
 				5B8CCDE029503B40002E601E /* Info.plist */,
 			);
 			path = ImageFeed;
+			sourceTree = "<group>";
+		};
+		5BB39DF72950A145009544A2 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5BB39DF52950A13F009544A2 /* UIColor+extension.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		5BB39DF82950A555009544A2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5B8CCDDB29503B40002E601E /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5BB39DF92950A595009544A2 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				5B8CCDD229503B3F002E601E /* AppDelegate.swift */,
+				5B8CCDD429503B3F002E601E /* SceneDelegate.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +168,7 @@
 				5B8CCDD729503B3F002E601E /* ViewController.swift in Sources */,
 				5B8CCDD329503B3F002E601E /* AppDelegate.swift in Sources */,
 				5B8CCDD529503B3F002E601E /* SceneDelegate.swift in Sources */,
+				5BB39DF62950A13F009544A2 /* UIColor+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
