@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B7F822A2953766A00BC9138 /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B7F82292953766700BC9138 /* SF-Pro.ttf */; };
 		5B8CCDD329503B3F002E601E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8CCDD229503B3F002E601E /* AppDelegate.swift */; };
 		5B8CCDD529503B3F002E601E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8CCDD429503B3F002E601E /* SceneDelegate.swift */; };
 		5B8CCDD729503B3F002E601E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8CCDD629503B3F002E601E /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B7F82292953766700BC9138 /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
 		5B8CCDCF29503B3F002E601E /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B8CCDD229503B3F002E601E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5B8CCDD429503B3F002E601E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		5BB39DF82950A555009544A2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5B7F82292953766700BC9138 /* SF-Pro.ttf */,
 				5B8CCDDB29503B40002E601E /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -153,6 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B8CCDDF29503B40002E601E /* LaunchScreen.storyboard in Resources */,
+				5B7F822A2953766A00BC9138 /* SF-Pro.ttf in Resources */,
 				5B8CCDDC29503B40002E601E /* Assets.xcassets in Resources */,
 				5B8CCDDA29503B3F002E601E /* Main.storyboard in Resources */,
 			);
