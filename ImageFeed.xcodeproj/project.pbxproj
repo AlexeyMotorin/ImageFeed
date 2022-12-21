@@ -48,6 +48,7 @@
 		5B7F822B2953787600BC9138 /* ImageList */ = {
 			isa = PBXGroup;
 			children = (
+				5B8CCDD829503B3F002E601E /* Main.storyboard */,
 				5B8CCDD629503B3F002E601E /* ImagesListViewController.swift */,
 				5B7F822E29537CA100BC9138 /* ImagesListCell.swift */,
 			);
@@ -77,8 +78,6 @@
 				5B7F822B2953787600BC9138 /* ImageList */,
 				5BB39DF72950A145009544A2 /* Helpers */,
 				5BB39DF82950A555009544A2 /* Resources */,
-				5B8CCDD829503B3F002E601E /* Main.storyboard */,
-				5B8CCDDD29503B40002E601E /* LaunchScreen.storyboard */,
 			);
 			path = ImageFeed;
 			sourceTree = "<group>";
@@ -98,6 +97,7 @@
 				5B7F82292953766700BC9138 /* SF-Pro.ttf */,
 				5B8CCDDB29503B40002E601E /* Assets.xcassets */,
 				5B8CCDE029503B40002E601E /* Info.plist */,
+				5B8CCDDD29503B40002E601E /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
