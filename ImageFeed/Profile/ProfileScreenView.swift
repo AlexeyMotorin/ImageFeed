@@ -3,7 +3,7 @@ import UIKit
 
 final class ProfileScreenView: UIView {
     
-    // MARK: - Private Properties
+    // MARK: - UI object
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -88,7 +88,7 @@ final class ProfileScreenView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Private Methods
+    // MARK: - Private methods
     private func addSabViews() {
         self.addSubview(stackView)
         stackView.addArrangedSubview(photoAndExitButtonStackView)

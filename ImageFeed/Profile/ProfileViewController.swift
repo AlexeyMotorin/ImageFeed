@@ -9,13 +9,16 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
 
+    // MARK: - Private properties
     private var profileScreen = ProfileScreenView()
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         viewSetting()
     }
     
+    // MARK: - Private methods
     private func viewSetting() {
         view.backgroundColor = .ypBackground
         addView()

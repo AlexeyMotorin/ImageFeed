@@ -3,11 +3,14 @@ import UIKit
 
 final class SingleImageViewController: UIViewController {
     
+    // MARK: - @IBOutlet
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     
+    // MARK: - Private properties
     private var sharingPresenter: SharingPresenterProtocol!
     
+    // MARK: - Public properties
     var image: UIImage! {
         didSet {
             guard isViewLoaded else { return }
@@ -15,6 +18,7 @@ final class SingleImageViewController: UIViewController {
         }
     }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +32,7 @@ final class SingleImageViewController: UIViewController {
         rescaleAndCenterImageInScrollView(image: image)
     }
     
+    // MARK: - @IBAction
     @IBAction func didTapBackButton(_ sender: UIButton) {
         dismiss(animated: true)
     }
@@ -36,6 +41,7 @@ final class SingleImageViewController: UIViewController {
         sharingPresenter.requestSharingImage(for: imageView.image)
     }
     
+    // MARK: - Private methods
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
         let minZoomScale = scrollView.minimumZoomScale
         let maxZoomScale = scrollView.maximumZoomScale
@@ -54,12 +60,14 @@ final class SingleImageViewController: UIViewController {
     }
 }
 
+// MARK: - UIScrollViewDelegate
 extension SingleImageViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         imageView
     }
 }
 
+// MARK: - SharingPresenterDelegate
 extension SingleImageViewController: SharingPresenterDelegate {
     func shareImage(viewController: UIActivityViewController?) {
         guard let viewController else { return }

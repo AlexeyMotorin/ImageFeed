@@ -10,6 +10,7 @@ final class ImagesListCell: UITableViewCell {
     @IBOutlet private weak var cellImageView: UIImageView!
     @IBOutlet private weak var likeButton: UIButton!
     
+    // MARK: - Public methods
     func config(date: String, image: String, likeImage: String) {
         dateLabel.text = date
         cellImageView.image = UIImage(named: image)
