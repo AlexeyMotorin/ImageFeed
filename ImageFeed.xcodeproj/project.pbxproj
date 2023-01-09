@@ -17,6 +17,8 @@
 		5B8CCDDC29503B40002E601E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B8CCDDB29503B40002E601E /* Assets.xcassets */; };
 		5B8CCDDF29503B40002E601E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B8CCDDD29503B40002E601E /* LaunchScreen.storyboard */; };
 		5BB39DF62950A13F009544A2 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB39DF52950A13F009544A2 /* UIColor+extension.swift */; };
+		5BF2D1F8296C6F1D00BD3EC5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF2D1F7296C6F1D00BD3EC5 /* ProfileViewController.swift */; };
+		5BF2D1FA296C6F5000BD3EC5 /* ProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF2D1F9296C6F5000BD3EC5 /* ProfileScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		5B8CCDDE29503B40002E601E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B8CCDE029503B40002E601E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BB39DF52950A13F009544A2 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
+		5BF2D1F7296C6F1D00BD3EC5 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		5BF2D1F9296C6F5000BD3EC5 /* ProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 			children = (
 				5BB39DF92950A595009544A2 /* Application */,
 				5B7F822B2953787600BC9138 /* ImageList */,
+				5BF2D1F6296C6F0200BD3EC5 /* Profile */,
 				5BB39DF72950A145009544A2 /* Helpers */,
 				5BB39DF82950A555009544A2 /* Resources */,
 			);
@@ -109,6 +114,15 @@
 				5B8CCDD429503B3F002E601E /* SceneDelegate.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		5BF2D1F6296C6F0200BD3EC5 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				5BF2D1F7296C6F1D00BD3EC5 /* ProfileViewController.swift */,
+				5BF2D1F9296C6F5000BD3EC5 /* ProfileScreenView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,8 +201,10 @@
 				5B7F822F29537CA100BC9138 /* ImagesListCell.swift in Sources */,
 				5B8CCDD329503B3F002E601E /* AppDelegate.swift in Sources */,
 				5B8CCDD529503B3F002E601E /* SceneDelegate.swift in Sources */,
+				5BF2D1F8296C6F1D00BD3EC5 /* ProfileViewController.swift in Sources */,
 				5B7F822D29537BB500BC9138 /* Collection+extension.swift in Sources */,
 				5BB39DF62950A13F009544A2 /* UIColor+extension.swift in Sources */,
+				5BF2D1FA296C6F5000BD3EC5 /* ProfileScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
