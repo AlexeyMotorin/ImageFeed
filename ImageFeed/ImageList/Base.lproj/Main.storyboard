@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zI5-de-wfg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pnZ-WW-qyW">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -15,6 +15,28 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="EfY-eb-VaG">
+            <objects>
+                <tabBarController id="pnZ-WW-qyW" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5g6-K0-3hk">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" name="ypWhite"/>
+                        <tabBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" name="ypBlack "/>
+                        </tabBarAppearance>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="vzl-lp-t51"/>
+                        <segue destination="zI5-de-wfg" kind="relationship" relationship="viewControllers" id="Ja2-y2-DWY"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cXc-D5-ZlX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1695" y="-374"/>
+        </scene>
         <!--Images List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -88,13 +110,14 @@
                             <constraint firstItem="SdS-eY-p3g" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="KmF-Ck-5qO"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="imageListIcon" id="aMe-uF-hhp"/>
                     <connections>
                         <outlet property="tableView" destination="SdS-eY-p3g" id="qw9-hn-vG4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="46.564885496183201" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="-753" y="-637"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="6ie-FI-0OX">
@@ -106,17 +129,23 @@
                         <viewLayoutGuide key="safeArea" id="bSy-1n-Kg6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="ProfileIcon" id="ndX-EH-maP"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f8i-Ek-Otz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="866" y="-4"/>
+            <point key="canvasLocation" x="-753" y="41"/>
         </scene>
     </scenes>
     <resources>
         <image name="0" width="66.666664123535156" height="44"/>
         <image name="IsLike" width="30" height="26"/>
+        <image name="ProfileIcon" width="24" height="24"/>
+        <image name="imageListIcon" width="20" height="22"/>
         <namedColor name="ypBackground">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="ypBlack ">
+            <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ypWhite">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
