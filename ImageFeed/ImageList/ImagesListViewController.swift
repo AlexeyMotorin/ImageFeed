@@ -1,9 +1,3 @@
-//
-//  ViewController.swift
-//  ImageFeed
-//
-//  Created by Алексей Моторин on 19.12.2022.
-//
 
 import UIKit
 
@@ -14,6 +8,7 @@ final class ImagesListViewController: UIViewController {
     
     // MARK: - Private properties
     private let photosName = Array(0..<20).map { "\($0)" }
+    private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -32,15 +27,26 @@ final class ImagesListViewController: UIViewController {
         tableView.delegate = self
     }
     
-    private func config(cell: ImagesListCell, for indexPath: IndexPath) {
-        
-        guard let image = UIImage(named: photosName[indexPath.row]) else { return }
-        cell.cellImageView.image = image
-        cell.dateLabel.text = dateFormatter.string(from: Date())
-        
-        let isLikedImage: UIImage? = indexPath.row % 2 == 0 ? UIImage(named: "NoLike") : UIImage(named: "IsLike")
-        cell.likeButton.setImage(isLikedImage, for: .normal)
-        
+    // MARK: - Override methods
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    
+    // MARK: Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showSingleImageSegueIdentifier {
+            let viewController = segue.destination as! SingleImageViewController
+            let indexPath = sender as! IndexPath
+            let image = UIImage(named: photosName[indexPath.row])
+            viewController.image = image
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
     }
 }
 
@@ -55,13 +61,18 @@ extension ImagesListViewController: UITableViewDataSource {
         guard
             let imagesListCell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath) as? ImagesListCell else { return UITableViewCell() }
         
-        config(cell: imagesListCell, for: indexPath)
+        let date = dateFormatter.string(from: Date())
+        let image = photosName[indexPath.row]
+        let isLikedImage: String = indexPath.row % 2 == 0 ? "NoLike" : "IsLike"
+        imagesListCell.config(date: date, image: image, likeImage: isLikedImage)
+    
         return imagesListCell
     }
 }
 
 // MARK: - UITableViewDelegate
 extension ImagesListViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let image = UIImage(named: photosName[indexPath.row]) else { return 0 }
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
@@ -71,4 +82,10 @@ extension ImagesListViewController: UITableViewDelegate {
         let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
         return cellHeight
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
+    }
 }
+

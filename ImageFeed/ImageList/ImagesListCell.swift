@@ -1,9 +1,3 @@
-//
-//  imageFeedCell.swift
-//  ImageFeed
-//
-//  Created by Алексей Моторин on 21.12.2022.
-//
 
 import UIKit
 
@@ -12,7 +6,13 @@ final class ImagesListCell: UITableViewCell {
     static let reuseIdentifier = "ImagesListCell"
     
     // MARK: - @IBOutlet
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var cellImageView: UIImageView!
-    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet private weak var dateLabel: UILabel!
+    @IBOutlet private weak var cellImageView: UIImageView!
+    @IBOutlet private weak var likeButton: UIButton!
+    
+    func config(date: String, image: String, likeImage: String) {
+        dateLabel.text = date
+        cellImageView.image = UIImage(named: image)
+        likeButton.setImage(UIImage(named: likeImage), for: .normal)
+    }
 }
