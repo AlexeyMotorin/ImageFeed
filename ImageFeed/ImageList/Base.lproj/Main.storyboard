@@ -129,9 +129,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="WGJ-7V-xy9" userLabel="imageView">
-                                <rect key="frame" x="-8" y="0.0" width="409" height="894"/>
-                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F70-7N-NDe">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="WGJ-7V-xy9" userLabel="imageView">
+                                        <rect key="frame" x="-8" y="0.0" width="409" height="852"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="WGJ-7V-xy9" firstAttribute="leadingMargin" secondItem="F70-7N-NDe" secondAttribute="leading" id="9rs-ah-MBR"/>
+                                    <constraint firstItem="WGJ-7V-xy9" firstAttribute="top" secondItem="tvk-Ek-k7e" secondAttribute="top" id="Jdt-o1-1v2"/>
+                                    <constraint firstItem="WGJ-7V-xy9" firstAttribute="centerY" secondItem="tvk-Ek-k7e" secondAttribute="centerY" id="Up2-X2-XaT"/>
+                                    <constraint firstItem="dJv-ZG-40v" firstAttribute="bottom" secondItem="WGJ-7V-xy9" secondAttribute="bottomMargin" id="XvL-Fa-Sig"/>
+                                    <constraint firstItem="WGJ-7V-xy9" firstAttribute="centerX" secondItem="tvk-Ek-k7e" secondAttribute="centerX" id="gDb-P5-CvA"/>
+                                    <constraint firstAttribute="trailing" secondItem="WGJ-7V-xy9" secondAttribute="trailingMargin" constant="28" id="uoj-BK-MCf"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="dJv-ZG-40v"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="tvk-Ek-k7e"/>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zzf-Rs-iEg">
                                 <rect key="frame" x="0.0" y="59" width="44" height="44"/>
                                 <constraints>
@@ -141,24 +156,40 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="backward"/>
                                 <connections>
-                                    <action selector="didTapBackButton:" destination="WLk-7x-cvv" eventType="touchUpInside" id="wym-AB-2hj"/>
+                                    <action selector="didTapBackButton:" destination="WLk-7x-cvv" eventType="touchUpInside" id="G75-wL-hte"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ok6-5b-Xf0" userLabel="SharingButton">
+                                <rect key="frame" x="171.66666666666666" y="717" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="SoC-Fl-SMK"/>
+                                    <constraint firstAttribute="width" constant="50" id="cuN-MB-Tdh"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="Sharing"/>
+                                <connections>
+                                    <action selector="didTabSharingButton:" destination="WLk-7x-cvv" eventType="touchUpInside" id="35t-yT-f69"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="CKr-vr-JUe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="WGJ-7V-xy9" firstAttribute="leadingMargin" secondItem="C8F-R1-DEE" secondAttribute="leading" id="ACe-97-FMY"/>
-                            <constraint firstAttribute="trailing" secondItem="WGJ-7V-xy9" secondAttribute="trailingMargin" id="Eli-ih-QJL"/>
-                            <constraint firstAttribute="bottom" secondItem="WGJ-7V-xy9" secondAttribute="bottomMargin" id="EpK-1C-vQ7"/>
-                            <constraint firstItem="WGJ-7V-xy9" firstAttribute="top" secondItem="C8F-R1-DEE" secondAttribute="top" id="FJd-zB-uvH"/>
+                            <constraint firstAttribute="bottom" secondItem="F70-7N-NDe" secondAttribute="bottom" id="4CS-x2-2LX"/>
+                            <constraint firstAttribute="trailing" secondItem="F70-7N-NDe" secondAttribute="trailing" id="Fe6-7d-rXY"/>
+                            <constraint firstItem="F70-7N-NDe" firstAttribute="top" secondItem="C8F-R1-DEE" secondAttribute="top" id="NyJ-GN-rmJ"/>
+                            <constraint firstItem="Ok6-5b-Xf0" firstAttribute="centerX" secondItem="C8F-R1-DEE" secondAttribute="centerX" id="Rnb-1A-S01"/>
                             <constraint firstItem="Zzf-Rs-iEg" firstAttribute="top" secondItem="CKr-vr-JUe" secondAttribute="top" id="VNt-BQ-eeY"/>
                             <constraint firstItem="Zzf-Rs-iEg" firstAttribute="leading" secondItem="CKr-vr-JUe" secondAttribute="leading" id="bw1-EU-0yB"/>
+                            <constraint firstItem="F70-7N-NDe" firstAttribute="leading" secondItem="C8F-R1-DEE" secondAttribute="leading" id="ccz-yw-ijL"/>
+                            <constraint firstAttribute="bottom" secondItem="F70-7N-NDe" secondAttribute="bottom" id="s4m-To-0FC"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Ok6-5b-Xf0" secondAttribute="bottom" constant="51" id="z3I-Vk-X32"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="flx-vp-viD"/>
                     <connections>
-                        <outlet property="imageView" destination="WGJ-7V-xy9" id="jvq-4H-Dpv"/>
+                        <outlet property="imageView" destination="WGJ-7V-xy9" id="7bJ-qd-rna"/>
+                        <outlet property="scrollView" destination="F70-7N-NDe" id="ZQe-1U-8S7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="83Z-i2-yE0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -186,6 +217,7 @@
         <image name="0" width="66.666664123535156" height="44"/>
         <image name="IsLike" width="30" height="26"/>
         <image name="ProfileIcon" width="24" height="24"/>
+        <image name="Sharing" width="50" height="50"/>
         <image name="backward" width="9" height="16"/>
         <image name="imageListIcon" width="20" height="22"/>
         <namedColor name="ypBackground">
