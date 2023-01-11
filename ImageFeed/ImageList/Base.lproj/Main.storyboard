@@ -133,15 +133,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="WGJ-7V-xy9" userLabel="imageView">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="44"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="WGJ-7V-xy9" firstAttribute="centerY" secondItem="F70-7N-NDe" secondAttribute="centerY" id="Xlo-K9-FsZ"/>
                                     <constraint firstItem="WGJ-7V-xy9" firstAttribute="leading" secondItem="F70-7N-NDe" secondAttribute="leading" id="ceQ-Jr-Idt"/>
                                     <constraint firstAttribute="trailing" secondItem="WGJ-7V-xy9" secondAttribute="trailing" id="daf-Wh-p2z"/>
                                     <constraint firstItem="WGJ-7V-xy9" firstAttribute="top" secondItem="F70-7N-NDe" secondAttribute="top" id="ipg-gN-Rdu"/>
-                                    <constraint firstItem="WGJ-7V-xy9" firstAttribute="centerX" secondItem="F70-7N-NDe" secondAttribute="centerX" id="wuZ-CN-pPH"/>
                                     <constraint firstAttribute="bottom" secondItem="WGJ-7V-xy9" secondAttribute="bottom" id="xhK-Yd-0R2"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="dJv-ZG-40v"/>
