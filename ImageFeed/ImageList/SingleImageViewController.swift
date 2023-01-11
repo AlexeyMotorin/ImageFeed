@@ -15,6 +15,7 @@ final class SingleImageViewController: UIViewController {
         didSet {
             guard isViewLoaded else { return }
             imageView.image = image
+            rescaleAndCenterImageInScrollView(image: image)
         }
     }
     
@@ -30,6 +31,7 @@ final class SingleImageViewController: UIViewController {
         scrollView.maximumZoomScale = 1.25
         
         rescaleAndCenterImageInScrollView(image: image)
+        
     }
     
     // MARK: - @IBAction

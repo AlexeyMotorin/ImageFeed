@@ -71,7 +71,7 @@
                                                     <state key="normal" image="IsLike"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 августа 2022" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QII-AE-GPj" userLabel="DateLabel">
-                                                    <rect key="frame" x="28.000000000000007" y="116" width="96.666666666666686" height="16"/>
+                                                    <rect key="frame" x="28.000000000000007" y="116" width="103.66666666666669" height="16"/>
                                                     <fontDescription key="fontDescription" name="SFPro-Medium" family="SF Pro" pointSize="13"/>
                                                     <color key="textColor" name="ypWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -132,17 +132,17 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F70-7N-NDe">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="WGJ-7V-xy9" userLabel="imageView">
-                                        <rect key="frame" x="-8" y="0.0" width="409" height="852"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="WGJ-7V-xy9" userLabel="imageView">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="WGJ-7V-xy9" firstAttribute="leadingMargin" secondItem="F70-7N-NDe" secondAttribute="leading" id="9rs-ah-MBR"/>
-                                    <constraint firstItem="WGJ-7V-xy9" firstAttribute="top" secondItem="tvk-Ek-k7e" secondAttribute="top" id="Jdt-o1-1v2"/>
-                                    <constraint firstItem="WGJ-7V-xy9" firstAttribute="centerY" secondItem="tvk-Ek-k7e" secondAttribute="centerY" id="Up2-X2-XaT"/>
-                                    <constraint firstItem="dJv-ZG-40v" firstAttribute="bottom" secondItem="WGJ-7V-xy9" secondAttribute="bottomMargin" id="XvL-Fa-Sig"/>
-                                    <constraint firstItem="WGJ-7V-xy9" firstAttribute="centerX" secondItem="tvk-Ek-k7e" secondAttribute="centerX" id="gDb-P5-CvA"/>
-                                    <constraint firstAttribute="trailing" secondItem="WGJ-7V-xy9" secondAttribute="trailingMargin" constant="28" id="uoj-BK-MCf"/>
+                                    <constraint firstItem="WGJ-7V-xy9" firstAttribute="centerY" secondItem="F70-7N-NDe" secondAttribute="centerY" id="Xlo-K9-FsZ"/>
+                                    <constraint firstItem="WGJ-7V-xy9" firstAttribute="leading" secondItem="F70-7N-NDe" secondAttribute="leading" id="ceQ-Jr-Idt"/>
+                                    <constraint firstAttribute="trailing" secondItem="WGJ-7V-xy9" secondAttribute="trailing" id="daf-Wh-p2z"/>
+                                    <constraint firstItem="WGJ-7V-xy9" firstAttribute="top" secondItem="F70-7N-NDe" secondAttribute="top" id="ipg-gN-Rdu"/>
+                                    <constraint firstItem="WGJ-7V-xy9" firstAttribute="centerX" secondItem="F70-7N-NDe" secondAttribute="centerX" id="wuZ-CN-pPH"/>
+                                    <constraint firstAttribute="bottom" secondItem="WGJ-7V-xy9" secondAttribute="bottom" id="xhK-Yd-0R2"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="dJv-ZG-40v"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="tvk-Ek-k7e"/>
@@ -173,7 +173,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="CKr-vr-JUe"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="ypBlack "/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="F70-7N-NDe" secondAttribute="bottom" id="4CS-x2-2LX"/>
                             <constraint firstAttribute="trailing" secondItem="F70-7N-NDe" secondAttribute="trailing" id="Fe6-7d-rXY"/>
@@ -182,7 +182,6 @@
                             <constraint firstItem="Zzf-Rs-iEg" firstAttribute="top" secondItem="CKr-vr-JUe" secondAttribute="top" id="VNt-BQ-eeY"/>
                             <constraint firstItem="Zzf-Rs-iEg" firstAttribute="leading" secondItem="CKr-vr-JUe" secondAttribute="leading" id="bw1-EU-0yB"/>
                             <constraint firstItem="F70-7N-NDe" firstAttribute="leading" secondItem="C8F-R1-DEE" secondAttribute="leading" id="ccz-yw-ijL"/>
-                            <constraint firstAttribute="bottom" secondItem="F70-7N-NDe" secondAttribute="bottom" id="s4m-To-0FC"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Ok6-5b-Xf0" secondAttribute="bottom" constant="51" id="z3I-Vk-X32"/>
                         </constraints>
                     </view>
@@ -194,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="83Z-i2-yE0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="69" y="-637"/>
+            <point key="canvasLocation" x="67.938931297709928" y="-637.32394366197184"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="6ie-FI-0OX">
