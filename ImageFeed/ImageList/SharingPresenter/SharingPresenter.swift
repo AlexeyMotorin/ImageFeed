@@ -16,7 +16,8 @@ extension SharingPresenter: SharingPresenterProtocol {
     func requestSharingImage(for image: UIImage?) {
         
         guard let image = image?.pngData() else {
-            fatalError()
+            assertionFailure("Error image sharing")
+            return
         }
         
         let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: [])
