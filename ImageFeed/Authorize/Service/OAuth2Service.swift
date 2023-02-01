@@ -34,6 +34,7 @@ final class OAuth2Service {
 }
 
 extension OAuth2Service {
+    // MARK: - Private methods
     private func object( for request: URLRequest,completion: @escaping (Result<OAuthTokenResponseBody, Error>) -> Void) -> URLSessionTask {
         let decoder = JSONDecoder()
         return urlSession.data(for: request) { (result: Result<Data, Error>) in

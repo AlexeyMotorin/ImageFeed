@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Структура для декодинга JSON ответа при получении Bearer token
 struct OAuthTokenResponseBody: Codable {
     let accessToken: String

@@ -1,13 +1,7 @@
-//
-//  WebViewViewController.swift
-//  ImageFeed
-//
-//  Created by Алексей Моторин on 27.01.2023.
-//
-
 import UIKit
 import WebKit
 
+/// С помощью протокола делегируем обработку кода и закрытие экрана
 protocol WebViewViewControllerDelegate: AnyObject {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
     func webViewViewControllerDidCancel(_ vc: WebViewViewController)

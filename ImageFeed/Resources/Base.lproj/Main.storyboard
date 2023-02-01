@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QrH-FG-nUS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xUx-8u-VAI">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -15,10 +15,37 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Splash View Controller-->
+        <scene sceneID="fhL-v1-2aL">
+            <objects>
+                <viewController storyboardIdentifier="SplashViewController" id="xUx-8u-VAI" customClass="SplashViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3w2-t7-GOQ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vector" translatesAutoresizingMaskIntoConstraints="NO" id="3Qh-qu-ixO">
+                                <rect key="frame" x="159.66666666666666" y="387.66666666666669" width="74" height="77"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="OKS-SC-HQZ"/>
+                        <color key="backgroundColor" name="ypBlack "/>
+                        <constraints>
+                            <constraint firstItem="3Qh-qu-ixO" firstAttribute="centerX" secondItem="3w2-t7-GOQ" secondAttribute="centerX" id="LbX-jV-f5F"/>
+                            <constraint firstItem="3Qh-qu-ixO" firstAttribute="centerY" secondItem="3w2-t7-GOQ" secondAttribute="centerY" id="qq5-k8-Au9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="QrH-FG-nUS" kind="presentation" identifier="ShowAuthenticationScreenIdentifier" modalPresentationStyle="fullScreen" id="DE9-R6-rVB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OhW-v9-AJq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2655" y="-862"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="EfY-eb-VaG">
             <objects>
-                <tabBarController id="pnZ-WW-qyW" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="pnZ-WW-qyW" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5g6-K0-3hk">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -341,6 +368,7 @@
         <image name="LogoOfUnsplash" width="60" height="60"/>
         <image name="ProfileIcon" width="24" height="24"/>
         <image name="Sharing" width="50" height="50"/>
+        <image name="Vector" width="74" height="77"/>
         <image name="backward" width="9" height="16"/>
         <image name="blackBackward" width="9" height="16"/>
         <image name="imageListIcon" width="20" height="22"/>
