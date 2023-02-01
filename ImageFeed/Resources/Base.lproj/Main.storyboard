@@ -103,17 +103,21 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="177-KU-M0K">
-                                <rect key="frame" x="20" y="59" width="29" height="44"/>
+                                <rect key="frame" x="16" y="59" width="33" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="xvF-pW-akg"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="blackBackward"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="blackBackward"/>
+                                <connections>
+                                    <action selector="didTabBackButton:" destination="nzU-EX-3FO" eventType="touchUpInside" id="Rs1-dQ-80v"/>
+                                </connections>
                             </button>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Tzg-mb-uQa">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tzg-mb-uQa">
                                 <rect key="frame" x="0.0" y="99" width="393" height="4"/>
                                 <color key="progressTintColor" name="ypBlack "/>
-                                <color key="trackTintColor" name="ypGray"/>
+                                <color key="trackTintColor" name="ypWhite"/>
                             </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="A4i-qG-hm9"/>
@@ -127,7 +131,7 @@
                             <constraint firstItem="177-KU-M0K" firstAttribute="top" secondItem="AlM-xh-DNf" secondAttribute="top" constant="59" id="Ft9-hg-ASa"/>
                             <constraint firstItem="A4i-qG-hm9" firstAttribute="trailing" secondItem="177-KU-M0K" secondAttribute="trailing" constant="344" id="KSj-X0-JVT"/>
                             <constraint firstAttribute="bottom" secondItem="9C3-lb-rgm" secondAttribute="bottom" id="XXS-b0-54l"/>
-                            <constraint firstItem="177-KU-M0K" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AlM-xh-DNf" secondAttribute="leading" constant="20" symbolic="YES" id="Z63-Z8-9ha"/>
+                            <constraint firstItem="177-KU-M0K" firstAttribute="leading" secondItem="AlM-xh-DNf" secondAttribute="leading" constant="16" id="Z63-Z8-9ha"/>
                             <constraint firstItem="Tzg-mb-uQa" firstAttribute="bottom" secondItem="177-KU-M0K" secondAttribute="bottom" id="mst-UP-5vh"/>
                         </constraints>
                     </view>
@@ -345,9 +349,6 @@
         </namedColor>
         <namedColor name="ypBlack ">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="ypGray">
-            <color red="0.68199998140335083" green="0.68599998950958252" blue="0.70599997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ypWhite">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

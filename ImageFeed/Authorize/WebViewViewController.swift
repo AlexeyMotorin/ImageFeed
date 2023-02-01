@@ -19,19 +19,21 @@ final class WebViewViewController: UIViewController {
     // MARK: - IBOutlet
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var progressView: UIProgressView!
-    
-    private struct WebViewConstants {
-        static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
         
-    }
-    
     // MARK: - Public properties
     weak var delegate: WebViewViewControllerDelegate?
+    
+    // MARK: - Constants
+    private struct WebViewConstants {
+        static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
+        static let responseType = "code"
+        static let urlComponentsPath = "/oauth/authorize/native"
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         guard let request = createRequest() else {
             fatalError("Ошибка запроса для авторизации")
         }
@@ -71,7 +73,7 @@ final class WebViewViewController: UIViewController {
         urlComponents.queryItems = [
             URLQueryItem(name: "client_id", value: Constants.accessKey),
             URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
-            URLQueryItem(name: "response_type", value: "code"),
+            URLQueryItem(name: "response_type", value: WebViewConstants.responseType),
             URLQueryItem(name: "scope", value: Constants.accessScope)
         ]
         
@@ -86,7 +88,7 @@ extension WebViewViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
         if let code = code(from: navigationAction) {
-            // TODO: передача делегату кода
+            delegate?.webViewViewController(self, didAuthenticateWithCode: code)
             decisionHandler(.cancel)
         } else {
             decisionHandler(.allow)
@@ -100,7 +102,7 @@ extension WebViewViewController: WKNavigationDelegate {
         if
             let url = navigationAction.request.url,
             let urlComponents = URLComponents(string: url.absoluteString),
-            urlComponents.path == "/oauth/authorize/native",
+            urlComponents.path == WebViewConstants.urlComponentsPath,
             let items = urlComponents.queryItems,
             let codeItem = items.first(where: { $0.name == "code"})
         {
