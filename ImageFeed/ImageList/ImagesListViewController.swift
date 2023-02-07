@@ -66,6 +66,7 @@ extension ImagesListViewController: UITableViewDataSource {
         let image = photoNames[indexPath.row]
         let isLikedImage: String = indexPath.row % 2 == 0 ? "NoLike" : "IsLike"
         imagesListCell.config(date: date, image: image, likeImage: isLikedImage)
+        imagesListCell.selectionStyle = .none
     
         return imagesListCell
     }
