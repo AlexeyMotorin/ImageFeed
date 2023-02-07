@@ -55,10 +55,10 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let token):
                 self.switchToTabBarController()
-                ProgressHUD.dismiss()
+                UIBlokingProgressHUD.show()
                 print(token)
             case .failure(let error):
-                ProgressHUD.dismiss()
+                UIBlokingProgressHUD.dismiss()
                 print(error)
             }
         }
