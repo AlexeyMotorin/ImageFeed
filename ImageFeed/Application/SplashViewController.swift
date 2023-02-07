@@ -1,4 +1,5 @@
 import UIKit
+import ProgressHUD
 
 /// Класс проверяет авторизован ли пользователь, в зависимости от этого показывает экран авторизации или tab bar controller
 final class SplashViewController: UIViewController {
@@ -48,13 +49,16 @@ final class SplashViewController: UIViewController {
 // MARK: AuthViewControllerDelegate
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
+        ProgressHUD.show()
         OAuth2Service.shared.fetchOAuthToken(code) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let token):
                 self.switchToTabBarController()
+                ProgressHUD.dismiss()
                 print(token)
             case .failure(let error):
+                ProgressHUD.dismiss()
                 print(error)
             }
         }
