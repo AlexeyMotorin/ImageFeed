@@ -5,6 +5,7 @@ final class OAuth2Service {
     
     // MARK: - Singleton
     static let shared = OAuth2Service()
+    private init() {}
     
     // MARK: - Private properties
     private let urlSession = URLSession.shared
@@ -57,7 +58,8 @@ extension OAuth2Service {
         let decoder = JSONDecoder()
         return urlSession.data(for: request) { (result: Result<Data, Error>) in
             let response = result.flatMap { data -> Result<OAuthTokenResponseBody, Error> in
-                Result { try decoder.decode(OAuthTokenResponseBody.self, from: data) }
+                Result { try decoder.decode(OAuthTokenResponseBody.self, from: data)
+                }
             }
             completion(response)
         }

@@ -11,6 +11,8 @@ final class ProfileViewController: UIViewController {
 
     // MARK: - Private properties
     private var profileScreenView = ProfileScreenView()
+    private let token = OAuth2TokenStorage().token
+    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -22,6 +24,18 @@ final class ProfileViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .ypBackground
         addView()
+        
+        if let token {
+            ProfileService.shared.fetchProfile(token) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let profile):
+                    self.profileScreenView.setProfile(from: profile)
+                case .failure(let failure):
+                    print(failure)
+                }
+            }
+        }
     }
     
     private func addView() {

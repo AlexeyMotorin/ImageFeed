@@ -59,7 +59,7 @@ final class ProfileScreenView: UIView {
         return label
     }()
     
-    private lazy var emailLabel: UILabel = {
+    private lazy var loginNameLabel: UILabel = {
         let label = UILabel()
         label.text = "@ekaterina_nov"
         label.textColor = .ypWhite?.withAlphaComponent(0.5)
@@ -67,7 +67,7 @@ final class ProfileScreenView: UIView {
         return label
     }()
     
-    private lazy var statusLabel: UILabel = {
+    private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Hello, world!"
         label.textColor = .ypWhite
@@ -88,6 +88,14 @@ final class ProfileScreenView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public methods
+    func setProfile(from profile: Profile?) {
+        guard let profile else { return }
+        nameLabel.text = profile.name
+        loginNameLabel.text = profile.loginName
+        descriptionLabel.text = profile.bio
+    }
+    
     // MARK: - Private methods
     private func addSabViews() {
         self.addSubview(stackView)
@@ -98,8 +106,8 @@ final class ProfileScreenView: UIView {
         photoAndExitButtonStackView.addArrangedSubview(exitButton)
         
         lablesStackView.addArrangedSubview(nameLabel)
-        lablesStackView.addArrangedSubview(emailLabel)
-        lablesStackView.addArrangedSubview(statusLabel)
+        lablesStackView.addArrangedSubview(loginNameLabel)
+        lablesStackView.addArrangedSubview(descriptionLabel)
     }
     
     private func activateConstraint() {
