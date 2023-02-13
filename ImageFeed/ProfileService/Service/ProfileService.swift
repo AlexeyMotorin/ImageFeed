@@ -12,7 +12,7 @@ final class ProfileService {
     //указатель на активную задачу, если задач нет, значение = nil. Значение присваивается до task.resume(), при успешном выполнении обнуляется
     private var task: URLSessionTask?
     
-    private var profile: Profile?
+    private(set) var profile: Profile?
     
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         

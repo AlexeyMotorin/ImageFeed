@@ -10,6 +10,9 @@ final class SplashViewController: UIViewController {
         static let tabBarIdentifier = "TabBarViewController"
     }
     
+    private let oauth2Service = OAuth2Service.shared
+    private let profileService = ProfileService.shared
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +20,14 @@ final class SplashViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        OAuth2TokenStorage().token != nil ? switchToTabBarController() : switchToAuthViewController()
+        
+        if let token = OAuth2TokenStorage().token {
+            fetchProfile(token: token)
+        } else {
+            switchToAuthViewController()
+        }
+        
+
     }
     
     // MARK: - Override methods
@@ -54,16 +64,28 @@ extension SplashViewController: AuthViewControllerDelegate {
     }
     
     private func fetchToken(_ code: String) {
-        OAuth2Service.shared.fetchOAuthToken(code) { [weak self] result in
+        oauth2Service.fetchOAuthToken(code) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let token):
-                self.switchToTabBarController()
-                UIBlokingProgressHUD.dismiss()
-                print(token)
+                self.fetchProfile(token: token)
             case .failure(let error):
                 UIBlokingProgressHUD.dismiss()
                 print(error)
+            }
+        }
+    }
+    
+    private func fetchProfile(token: String) {
+        profileService.fetchProfile(token) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let profile):
+                UIBlokingProgressHUD.dismiss()
+                self.switchToTabBarController()
+            case .failure(let error):
+            // TODO: показать ошибку
+                break
             }
         }
     }

@@ -11,7 +11,7 @@ final class ProfileViewController: UIViewController {
 
     // MARK: - Private properties
     private var profileScreenView = ProfileScreenView()
-    private let token = OAuth2TokenStorage().token
+    private let profileService = ProfileService.shared
     
     
     // MARK: - Lifecycle
@@ -25,16 +25,8 @@ final class ProfileViewController: UIViewController {
         view.backgroundColor = .ypBackground
         addView()
         
-        if let token {
-            ProfileService.shared.fetchProfile(token) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let profile):
-                    self.profileScreenView.setProfile(from: profile)
-                case .failure(let failure):
-                    print(failure)
-                }
-            }
+        if let profile = profileService.profile {
+            updateProfileDetails(profile: profile)
         }
     }
     
@@ -47,5 +39,9 @@ final class ProfileViewController: UIViewController {
             profileScreenView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             profileScreenView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    private func updateProfileDetails(profile: Profile) {
+        profileScreenView.updateProfile(from: profile)
     }
 }

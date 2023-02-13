@@ -89,7 +89,7 @@ final class ProfileScreenView: UIView {
     }
     
     // MARK: - Public methods
-    func setProfile(from profile: Profile?) {
+    func updateProfile(from profile: Profile?) {
         guard let profile else { return }
         nameLabel.text = profile.name
         loginNameLabel.text = profile.loginName
