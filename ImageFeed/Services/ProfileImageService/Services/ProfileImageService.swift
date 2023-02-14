@@ -10,9 +10,7 @@ final class ProfileImageService {
     
     // MARK: - Private properties
     private let urlSession = URLSession.shared
-    private let token = OAuth2TokenStorage().token
-    
-    
+       
     //указатель на активную задачу, если задач нет, значение = nil. Значение присваивается до task.resume(), при успешном выполнении обнуляется
     private var task: URLSessionTask?
     private(set) var avatarURL: String?
@@ -21,7 +19,11 @@ final class ProfileImageService {
         assert(Thread.isMainThread)
         task?.cancel()
         
-        guard let request = profileImageRequest(with: userName) else { return }
+        guard let token = OAuth2TokenStorage().token else { return }
+        
+        let request = profileImageRequest(with: userName, token: token)
+        
+        guard let request else { return }
                 
         let task = object(for: request) { [weak self] result in
             guard let self = self else { return }
@@ -43,8 +45,7 @@ final class ProfileImageService {
         task.resume()
     }
     
-    private func profileImageRequest(with username: String) -> URLRequest? {
-        guard let token else { return nil }
+    private func profileImageRequest(with username: String, token: String) -> URLRequest? {
         var request = URLRequest.makeHTTPRequest(
             path: "/users"
             + "/\(username)",
