@@ -31,6 +31,8 @@
 		5BF1E30D299AA48700A0BA08 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1E30C299AA48700A0BA08 /* ProfileService.swift */; };
 		5BF1E311299AA4D900A0BA08 /* ProfileResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1E310299AA4D900A0BA08 /* ProfileResult.swift */; };
 		5BF1E313299AA59C00A0BA08 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1E312299AA59C00A0BA08 /* Profile.swift */; };
+		5BF1E319299AB83800A0BA08 /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1E318299AB83800A0BA08 /* ProfileImageService.swift */; };
+		5BF1E31C299AB85E00A0BA08 /* UserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1E31B299AB85E00A0BA08 /* UserResult.swift */; };
 		5BF2D1F8296C6F1D00BD3EC5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF2D1F7296C6F1D00BD3EC5 /* ProfileViewController.swift */; };
 		5BF2D1FA296C6F5000BD3EC5 /* ProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF2D1F9296C6F5000BD3EC5 /* ProfileScreenView.swift */; };
 		5BF2D1FC296C76E400BD3EC5 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF2D1FB296C76E400BD3EC5 /* SingleImageViewController.swift */; };
@@ -65,6 +67,8 @@
 		5BF1E30C299AA48700A0BA08 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		5BF1E310299AA4D900A0BA08 /* ProfileResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResult.swift; sourceTree = "<group>"; };
 		5BF1E312299AA59C00A0BA08 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		5BF1E318299AB83800A0BA08 /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
+		5BF1E31B299AB85E00A0BA08 /* UserResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResult.swift; sourceTree = "<group>"; };
 		5BF2D1F7296C6F1D00BD3EC5 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5BF2D1F9296C6F5000BD3EC5 /* ProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenView.swift; sourceTree = "<group>"; };
 		5BF2D1FB296C76E400BD3EC5 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
@@ -116,9 +120,9 @@
 			isa = PBXGroup;
 			children = (
 				5BB39DF92950A595009544A2 /* Application */,
+				5BF1E314299AB7D400A0BA08 /* Services */,
 				5BE0A054298A44AF008EA01F /* Authorize */,
 				5B7F822B2953787600BC9138 /* ImageList */,
-				5BF1E30B299AA47400A0BA08 /* ProfileService */,
 				5BF2D1F6296C6F0200BD3EC5 /* Profile */,
 				5BB39DF72950A145009544A2 /* Helpers */,
 				5BB39DF82950A555009544A2 /* Resources */,
@@ -166,8 +170,6 @@
 			children = (
 				5BE0A055298A44FF008EA01F /* AuthViewController.swift */,
 				5BE0A057298A4786008EA01F /* WebViewViewController.swift */,
-				5BE0A059298A4A1A008EA01F /* Models */,
-				5BE0A05C298A4AB6008EA01F /* Service */,
 				5BE0A065298A536B008EA01F /* Storage */,
 			);
 			path = Authorize;
@@ -181,12 +183,13 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		5BE0A05C298A4AB6008EA01F /* Service */ = {
+		5BE0A05C298A4AB6008EA01F /* OAuth2Service */ = {
 			isa = PBXGroup;
 			children = (
-				5BE0A05D298A4AD6008EA01F /* OAuth2Service.swift */,
+				5BF1E315299AB7F100A0BA08 /* Service */,
+				5BE0A059298A4A1A008EA01F /* Models */,
 			);
-			path = Service;
+			path = OAuth2Service;
 			sourceTree = "<group>";
 		};
 		5BE0A065298A536B008EA01F /* Storage */ = {
@@ -219,6 +222,49 @@
 			children = (
 				5BF1E310299AA4D900A0BA08 /* ProfileResult.swift */,
 				5BF1E312299AA59C00A0BA08 /* Profile.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5BF1E314299AB7D400A0BA08 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5BF1E316299AB82400A0BA08 /* ProfileImageService */,
+				5BF1E30B299AA47400A0BA08 /* ProfileService */,
+				5BE0A05C298A4AB6008EA01F /* OAuth2Service */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5BF1E315299AB7F100A0BA08 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				5BE0A05D298A4AD6008EA01F /* OAuth2Service.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		5BF1E316299AB82400A0BA08 /* ProfileImageService */ = {
+			isa = PBXGroup;
+			children = (
+				5BF1E31A299AB85700A0BA08 /* Model */,
+				5BF1E317299AB82E00A0BA08 /* Services */,
+			);
+			path = ProfileImageService;
+			sourceTree = "<group>";
+		};
+		5BF1E317299AB82E00A0BA08 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5BF1E318299AB83800A0BA08 /* ProfileImageService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5BF1E31A299AB85700A0BA08 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5BF1E31B299AB85E00A0BA08 /* UserResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -328,6 +374,7 @@
 				5B8CCDD329503B3F002E601E /* AppDelegate.swift in Sources */,
 				5B8CCDD529503B3F002E601E /* SceneDelegate.swift in Sources */,
 				5BE0A062298A4BB9008EA01F /* URLSession+extension.swift in Sources */,
+				5BF1E31C299AB85E00A0BA08 /* UserResult.swift in Sources */,
 				5BF1E30D299AA48700A0BA08 /* ProfileService.swift in Sources */,
 				5BE0A05B298A4A3C008EA01F /* OAuthTokenResponseBody.swift in Sources */,
 				5BF2D1F8296C6F1D00BD3EC5 /* ProfileViewController.swift in Sources */,
@@ -345,6 +392,7 @@
 				5BF2D1FA296C6F5000BD3EC5 /* ProfileScreenView.swift in Sources */,
 				5BF1E311299AA4D900A0BA08 /* ProfileResult.swift in Sources */,
 				5BC9864D2992820500998E33 /* UIBlokingProgressHUD.swift in Sources */,
+				5BF1E319299AB83800A0BA08 /* ProfileImageService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

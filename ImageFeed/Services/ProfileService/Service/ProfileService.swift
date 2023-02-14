@@ -9,6 +9,11 @@ final class ProfileService {
     // MARK: - Private properties
     private let urlSession = URLSession.shared
     
+    //MARK: - ProfileService
+    private enum ProfileServiceError: Error {
+        case getProfileDetailError
+    }
+    
     //указатель на активную задачу, если задач нет, значение = nil. Значение присваивается до task.resume(), при успешном выполнении обнуляется
     private var task: URLSessionTask?
     
@@ -26,7 +31,10 @@ final class ProfileService {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let profileResult):
-                    guard let profile = self.getProfile(from: profileResult) else { return }
+                    guard let profile = self.getProfile(from: profileResult) else {
+                        completion(.failure(ProfileServiceError.getProfileDetailError))
+                        return
+                    }
                     self.profile = profile
                     completion(.success(profile))
                     self.task = nil

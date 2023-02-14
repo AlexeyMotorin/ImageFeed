@@ -12,6 +12,7 @@ final class SplashViewController: UIViewController {
     
     private let oauth2Service = OAuth2Service.shared
     private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -26,8 +27,6 @@ final class SplashViewController: UIViewController {
         } else {
             switchToAuthViewController()
         }
-        
-
     }
     
     // MARK: - Override methods
@@ -70,7 +69,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .success(let token):
                 self.fetchProfile(token: token)
             case .failure(let error):
-                UIBlokingProgressHUD.dismiss()
+                UIBlockingProgressHUD.dismiss()
                 print(error)
             }
         }
@@ -81,11 +80,26 @@ extension SplashViewController: AuthViewControllerDelegate {
             guard let self = self else { return }
             switch result {
             case .success(let profile):
-                UIBlokingProgressHUD.dismiss()
+                self.fetchProfileImageURL(username: profile.username)
+                UIBlockingProgressHUD.dismiss()
                 self.switchToTabBarController()
             case .failure(let error):
-            // TODO: показать ошибку
+                // TODO: показать ошибку
                 break
+            }
+        }
+    }
+    
+    private func fetchProfileImageURL(username: String) {
+        profileImageService.fetchProfile(username) { result in
+            switch result {
+            case .success(let profileImageURL):
+                NotificationCenter.default
+                    .post(name: ProfileImageService.didChangeNotification,
+                          object: self,
+                          userInfo: ["URL" : profileImageURL])
+            case .failure(let failure):
+                print(failure)
             }
         }
     }
