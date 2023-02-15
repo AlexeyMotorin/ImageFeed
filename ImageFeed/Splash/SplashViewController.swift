@@ -13,6 +13,7 @@ final class SplashViewController: UIViewController {
     private let oauth2Service = OAuth2Service.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
+    private var alertPresenter: AuthErrorAlertPresenter?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -21,6 +22,8 @@ final class SplashViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        alertPresenter = AuthErrorAlertPresenter(delegate: self)
         
         if let token = OAuth2TokenStorage().token {
             fetchProfile(token: token)
@@ -58,7 +61,7 @@ final class SplashViewController: UIViewController {
 // MARK: AuthViewControllerDelegate
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
-        ProgressHUD.show()
+        UIBlockingProgressHUD.show()
         fetchToken(code)
     }
     
@@ -68,9 +71,9 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let token):
                 self.fetchProfile(token: token)
-            case .failure(let error):
+            case .failure(_):
                 UIBlockingProgressHUD.dismiss()
-                print(error)
+                self.showErrorAlert()
             }
         }
     }
@@ -83,9 +86,9 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.fetchProfileImageURL(username: profile.username)
                 UIBlockingProgressHUD.dismiss()
                 self.switchToTabBarController()
-            case .failure(let error):
-                // TODO: показать ошибку
-                break
+            case .failure(_):
+                UIBlockingProgressHUD.dismiss()
+                self.showErrorAlert()
             }
         }
     }
@@ -102,5 +105,21 @@ extension SplashViewController: AuthViewControllerDelegate {
                 print(failure)
             }
         }
+    }
+    
+    private func showErrorAlert() {
+        let alertModel = AuthErrorAlertModel(
+            title: "Что-то пошло не так(",
+            message: "Не удалось войти в систему",
+            buttonText: "Ok")
+        
+        alertPresenter?.requestShowResultAlert(alertModel: alertModel)
+    }
+}
+
+extension SplashViewController: AuthErrorAlertPresenterDelegate {
+    func showErrorAlert(alertController: UIAlertController?) {
+        guard let alertController = alertController else { return }
+        present(alertController, animated: true)
     }
 }
