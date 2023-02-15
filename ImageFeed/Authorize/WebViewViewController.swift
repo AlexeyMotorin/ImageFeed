@@ -13,7 +13,7 @@ final class WebViewViewController: UIViewController {
     // MARK: - IBOutlet
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var progressView: UIProgressView!
-        
+    
     // MARK: - Public properties
     weak var delegate: WebViewViewControllerDelegate?
     
@@ -23,6 +23,9 @@ final class WebViewViewController: UIViewController {
         static let responseType = "code"
         static let urlComponentsPath = "/oauth/authorize/native"
     }
+    
+    // MARK: - Private properties
+    private var estimatedProgressObservation: NSKeyValueObservation?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -34,22 +37,16 @@ final class WebViewViewController: UIViewController {
         
         webView.load(request)
         webView.navigationDelegate = self
-        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), context: nil)
+        
+        estimatedProgressObservation = webView.observe(
+            \.estimatedProgress,
+             options: [],
+             changeHandler: { [weak self] _, _ in
+                 guard let self = self else { return }
+                 self.updateProgress()
+             })
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
-    }
-    
-    // MARK: - Override methods
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == #keyPath(WKWebView.estimatedProgress) {
-            updateProgress()
-        } else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
-    }
-    
+        
     // MARK: - IBAction
     @IBAction func didTabBackButton(_ sender: UIButton) {
         delegate?.webViewViewControllerDidCancel(self)
