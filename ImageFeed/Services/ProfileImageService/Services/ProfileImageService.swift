@@ -24,8 +24,8 @@ final class ProfileImageService {
         let request = profileImageRequest(with: userName, token: token)
         
         guard let request else { return }
-                
-        let task = object(for: request) { [weak self] result in
+        
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<UserResult, Error>) in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
@@ -40,7 +40,7 @@ final class ProfileImageService {
                 }
             }
         }
-        
+                
         self.task = task
         task.resume()
     }
@@ -53,18 +53,6 @@ final class ProfileImageService {
             baseURL: Constants.apiBaseURL)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
-    }
-    
-    private func object(for request: URLRequest, completion: @escaping (Result<UserResult, Error>) -> Void) -> URLSessionTask {
-        let decoder = JSONDecoder()
-        return urlSession.data(for: request) { (result: Result<Data, Error>) in
-            let response = result.flatMap { data -> Result<UserResult, Error> in
-                Result {
-                   try decoder.decode(UserResult.self, from: data)
-                }
-            }
-            completion(response)
-        }
     }
 }
 

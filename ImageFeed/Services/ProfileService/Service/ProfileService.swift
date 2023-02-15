@@ -25,8 +25,8 @@ final class ProfileService {
         task?.cancel()
         
         let request = profileRequest(with: token)
-                
-        let task = object(for: request) { [weak self] result in
+        
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<ProfileResult, Error>) in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
@@ -44,7 +44,7 @@ final class ProfileService {
                 }
             }
         }
-        
+ 
         self.task = task
         task.resume()
     }
@@ -56,18 +56,6 @@ final class ProfileService {
             baseURL: Constants.apiBaseURL)
         request.setValue("Bearer \(code)", forHTTPHeaderField: "Authorization")
         return request
-    }
-    
-    private func object(for request: URLRequest, completion: @escaping (Result<ProfileResult, Error>) -> Void) -> URLSessionTask {
-        let decoder = JSONDecoder()
-        return urlSession.data(for: request) { (result: Result<Data, Error>) in
-            let response = result.flatMap { data -> Result<ProfileResult, Error> in
-                Result {
-                   try decoder.decode(ProfileResult.self, from: data)
-                }
-            }
-            completion(response)
-        }
     }
     
     private func getProfile(from profile: ProfileResult) -> Profile? {

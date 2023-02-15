@@ -31,7 +31,7 @@ final class OAuth2Service {
         
         let request = authTokenRequest(code: code)
         
-        let task = object(for: request) { [weak self] result in
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
@@ -46,26 +46,14 @@ final class OAuth2Service {
                 }
             }
         }
-        
+                
         self.task = task // так как задача выполняется асинхронно на главном потоке после ее запуска мы присваиваем ее значение в указатель для активной задачи, после успешного выполнения таска, указатель станет nil
         task.resume() // запускаем задачу
     }
 }
 
 extension OAuth2Service {
-    // MARK: - Private methods
-    private func object( for request: URLRequest,completion: @escaping (Result<OAuthTokenResponseBody, Error>) -> Void) -> URLSessionTask {
-        let decoder = JSONDecoder()
-        return urlSession.data(for: request) { (result: Result<Data, Error>) in
-            let response = result.flatMap { data -> Result<OAuthTokenResponseBody, Error> in
-                Result { try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                }
-            }
-            completion(response)
-        }
-    }
-    
-    private func authTokenRequest(code: String) -> URLRequest {
+   private func authTokenRequest(code: String) -> URLRequest {
         URLRequest.makeHTTPRequest(
             path: "/oauth/token"
             + "?client_id=\(Constants.accessKey)"
