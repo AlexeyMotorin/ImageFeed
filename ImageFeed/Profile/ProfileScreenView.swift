@@ -1,5 +1,6 @@
 
 import UIKit
+import Kingfisher
 
 final class ProfileScreenView: UIView {
     
@@ -35,11 +36,11 @@ final class ProfileScreenView: UIView {
     
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        let image = UIImage(named: "Photo")
+        let image = UIImage(named: "placeholder")
         imageView.image = image
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = imageView.frame.width / 2
-        imageView.layer.masksToBounds = true
+        imageView.backgroundColor = .clear
         return imageView
     }()
     
@@ -94,6 +95,15 @@ final class ProfileScreenView: UIView {
         nameLabel.text = profile.name
         loginNameLabel.text = profile.loginName
         descriptionLabel.text = profile.bio
+    }
+    
+    func updateAvatar(_ url: URL) {
+        
+        ImageCache.default.clearMemoryCache()
+        ImageCache.default.clearDiskCache()
+    
+        profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
+        profileImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"))
     }
     
     // MARK: - Private methods

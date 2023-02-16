@@ -30,7 +30,7 @@ final class ProfileImageService {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let userResult):
-                    let smallImageURLString = userResult.profileImage.small
+                    let smallImageURLString = userResult.profileImage.large
                     self.avatarURL = smallImageURLString
                     completion(.success(smallImageURLString))
                     self.task = nil

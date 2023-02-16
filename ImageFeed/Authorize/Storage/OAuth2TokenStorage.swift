@@ -1,19 +1,27 @@
 import Foundation
+import SwiftKeychainWrapper
 
 /// Класс отвечает за хранение bearer token
 final class OAuth2TokenStorage {
     
     // MARK: Private enum
     private enum Keys: String {
-        case token
+        case authToken = "Auth token"
     }
     
     // MARK: Private properties
-    private let userDefault = UserDefaults.standard
+    private let keyChainWrapper = KeychainWrapper.standard
     
     // MARK: Public properties
     var token: String? {
-        get { userDefault.string(forKey: Keys.token.rawValue)}
-        set { userDefault.set(newValue, forKey: Keys.token.rawValue)}
+        get { keyChainWrapper.string(forKey: Keys.authToken.rawValue) }
+        set {
+            guard let newValue else { return }
+            let isSucces = keyChainWrapper.set(newValue, forKey: Keys.authToken.rawValue)
+            guard isSucces else {
+                print("Ошибка записи токена")
+                return
+            }
+        }
     }
 }

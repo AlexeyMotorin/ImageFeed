@@ -11,6 +11,8 @@
 		5B08F370299CBB9200DDA5ED /* AuthErrorAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B08F36F299CBB9200DDA5ED /* AuthErrorAlertPresenter.swift */; };
 		5B08F372299CBBD500DDA5ED /* AuthErrorAlertPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B08F371299CBBD500DDA5ED /* AuthErrorAlertPresenterProtocol.swift */; };
 		5B08F374299CBC7F00DDA5ED /* AuthErrorAlertPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B08F373299CBC7F00DDA5ED /* AuthErrorAlertPresenterDelegate.swift */; };
+		5B08F377299CCECE00DDA5ED /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5B08F376299CCECE00DDA5ED /* Kingfisher */; };
+		5B54BD06299E0BAD004B5B79 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 5B54BD05299E0BAD004B5B79 /* SwiftKeychainWrapper */; };
 		5B7F822A2953766A00BC9138 /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B7F82292953766700BC9138 /* SF-Pro.ttf */; };
 		5B7F822D29537BB500BC9138 /* Collection+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F822C29537BB500BC9138 /* Collection+extension.swift */; };
 		5B7F822F29537CA100BC9138 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F822E29537CA100BC9138 /* ImagesListCell.swift */; };
@@ -90,7 +92,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B08F377299CCECE00DDA5ED /* Kingfisher in Frameworks */,
 				5BC9864A2992282300998E33 /* ProgressHUD in Frameworks */,
+				5B54BD06299E0BAD004B5B79 /* SwiftKeychainWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +338,8 @@
 			name = ImageFeed;
 			packageProductDependencies = (
 				5BC986492992282300998E33 /* ProgressHUD */,
+				5B08F376299CCECE00DDA5ED /* Kingfisher */,
+				5B54BD05299E0BAD004B5B79 /* SwiftKeychainWrapper */,
 			);
 			productName = ImageFeed;
 			productReference = 5B8CCDCF29503B3F002E601E /* ImageFeed.app */;
@@ -365,6 +371,8 @@
 			mainGroup = 5B8CCDC629503B3F002E601E;
 			packageReferences = (
 				5BC986482992282200998E33 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
+				5B08F375299CCECE00DDA5ED /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				5B54BD04299E0BAD004B5B79 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 			);
 			productRefGroup = 5B8CCDD029503B3F002E601E /* Products */;
 			projectDirPath = "";
@@ -652,6 +660,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5B08F375299CCECE00DDA5ED /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		5B54BD04299E0BAD004B5B79 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		5BC986482992282200998E33 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/relatedcode/ProgressHUD";
@@ -663,6 +687,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5B08F376299CCECE00DDA5ED /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5B08F375299CCECE00DDA5ED /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		5B54BD05299E0BAD004B5B79 /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5B54BD04299E0BAD004B5B79 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
 		5BC986492992282300998E33 /* ProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5BC986482992282200998E33 /* XCRemoteSwiftPackageReference "ProgressHUD" */;
