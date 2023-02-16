@@ -34,13 +34,13 @@ final class ProfileScreenView: UIView {
         return stackView
     }()
     
-    private lazy var profileImageView: UIImageView = {
+    private(set) lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         let image = UIImage(named: "placeholder")
         imageView.image = image
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = imageView.frame.width / 2
         imageView.backgroundColor = .clear
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -98,12 +98,16 @@ final class ProfileScreenView: UIView {
     }
     
     func updateAvatar(_ url: URL) {
-        
-        ImageCache.default.clearMemoryCache()
-        ImageCache.default.clearDiskCache()
-    
-        profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
-        profileImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"))
+        profileImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"), options: nil) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let value):
+                self.profileImageView.image = value.image
+                self.profileImageView.layer.cornerRadius = self.profileImageView.frame.width / 2
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     // MARK: - Private methods

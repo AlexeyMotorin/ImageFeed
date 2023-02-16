@@ -59,7 +59,6 @@ final class ProfileViewController: UIViewController {
     private func updateAvatar() {
         guard let profileImageURL = ProfileImageService.shared.avatarURL,
               let url = URL(string: profileImageURL) else { return }
-       
         profileScreenView.updateAvatar(url)
     }
 }

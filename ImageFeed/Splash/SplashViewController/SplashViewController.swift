@@ -6,10 +6,12 @@ final class SplashViewController: UIViewController {
     
     // MARK: - Private properties
     private struct SplashVCConstants {
-        static let authenticationScreenIdentifier = "ShowAuthenticationScreenIdentifier"
+        static let authViewControllerIdentifier = "AuthViewController"
         static let tabBarIdentifier = "TabBarViewController"
+        static let storyboardName = "Main"
     }
     
+    private var splashScreenView = SplashViewControllerScreen()
     private let oauth2Service = OAuth2Service.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
@@ -18,6 +20,7 @@ final class SplashViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -31,30 +34,41 @@ final class SplashViewController: UIViewController {
             switchToAuthViewController()
         }
     }
+        
+    private func setupView() {
+        view.backgroundColor = .ypBackground
+        addView()
+    }
     
-    // MARK: - Override methods
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == SplashVCConstants.authenticationScreenIdentifier {
-            guard let navController = segue.destination as? UINavigationController,
-                  let viewController = navController.viewControllers.first as? AuthViewController else {
-                fatalError("Ошибка сигвея \(SplashVCConstants.authenticationScreenIdentifier)")
-            }
-            viewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
+    private func addView() {
+        view.addSubview(splashScreenView)
+        NSLayoutConstraint.activate([
+            splashScreenView.topAnchor.constraint(equalTo: view.topAnchor),
+            splashScreenView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            splashScreenView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            splashScreenView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     // MARK: - Private methods
     private func switchToAuthViewController() {
-        performSegue(withIdentifier: SplashVCConstants.authenticationScreenIdentifier, sender: nil)
+        guard let viewController = getAuthViewController() else { return }
+        present(viewController, animated: true)
     }
     
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid configuration")}
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: SplashVCConstants.storyboardName, bundle: nil)
         let tabBarVC = storyboard.instantiateViewController(withIdentifier: SplashVCConstants.tabBarIdentifier)
         window.rootViewController = tabBarVC
+    }
+    
+    private func getAuthViewController() -> UINavigationController? {
+        guard let authViewController = UIStoryboard(name: SplashVCConstants.storyboardName, bundle: .main).instantiateViewController(withIdentifier: SplashVCConstants.authViewControllerIdentifier) as? AuthViewController else { return nil }
+        authViewController.delegate = self
+        let navigationController = UINavigationController(rootViewController: authViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        return navigationController
     }
 }
 
@@ -74,6 +88,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .failure(_):
                 UIBlockingProgressHUD.dismiss()
                 self.showErrorAlert()
+                self.switchToAuthViewController()
             }
         }
     }
@@ -86,8 +101,9 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.fetchProfileImageURL(username: profile.username)
                 UIBlockingProgressHUD.dismiss()
                 self.switchToTabBarController()
-            case .failure(_):
+            case .failure(let error):
                 UIBlockingProgressHUD.dismiss()
+                print(error)
                 self.showErrorAlert()
                 self.switchToAuthViewController()
             }
