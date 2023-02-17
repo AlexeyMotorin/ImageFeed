@@ -13,12 +13,7 @@ final class SingleImageViewController: UIViewController {
     private var singleImageScreen: SingleImageViewControllerScreen!
     
     // MARK: - Public properties
-    var image: UIImage! {
-        didSet {
-            guard isViewLoaded else { return }
-            singleImageScreen.setImage(image)
-        }
-    }
+    var image: UIImage!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

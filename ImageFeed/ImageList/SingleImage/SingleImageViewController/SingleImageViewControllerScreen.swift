@@ -15,7 +15,6 @@ final class SingleImageViewControllerScreen: UIView {
     private lazy var contentView: UIView = {
         let contenView = UIView()
         contenView.translatesAutoresizingMaskIntoConstraints = false
-        contenView.backgroundColor = .clear
         return contenView
     }()
     
@@ -88,14 +87,13 @@ final class SingleImageViewControllerScreen: UIView {
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
 
-            imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             backButton.topAnchor.constraint(equalTo: topAnchor, constant: 54),
@@ -131,7 +129,6 @@ final class SingleImageViewControllerScreen: UIView {
     }
     
     @objc private func sharingButtonTapped() {
-        print("work")
         viewController?.sharingImage(imageView.image)
     }
 }
