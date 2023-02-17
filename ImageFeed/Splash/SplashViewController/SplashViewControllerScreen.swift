@@ -12,13 +12,13 @@ class SplashViewControllerScreen: UIView {
  
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
-        let image = UIImage(named: "LogoOfUnsplash")
+        let image = UIImage(named: "Vector")
         imageView.image = image
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .clear
         return imageView
     }()
-    
+        
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,8 +43,5 @@ class SplashViewControllerScreen: UIView {
             logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
-    
-    @objc private func didExitButtonTapped() {
-        // выход из аккаунта
-    }
+
 }

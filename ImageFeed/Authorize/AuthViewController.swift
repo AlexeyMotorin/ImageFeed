@@ -5,6 +5,10 @@ protocol AuthViewControllerDelegate: AnyObject {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String)
 }
 
+protocol AuthViewControllerProtocol: AnyObject {
+    func showWebviewController()
+}
+
 /// Контроллер авторизации пользователя
 final class AuthViewController: UIViewController {
     
@@ -13,22 +17,24 @@ final class AuthViewController: UIViewController {
     
     // MARK: - Private properties
     private let segueIdentifier = "ShowWebView"
+    private var authScreenView: AuthViewControllerScreen!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .clear
+        authScreenView = AuthViewControllerScreen(viewController: self)
+        setScreenViewOnViewController(view: authScreenView)
     }
     
     // MARK: - Override methods
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueIdentifier {
-            guard let viewController = segue.destination as? WebViewViewController else {
-                fatalError("Ошибка сигвея \(segueIdentifier)")
-            }
-            viewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
     }
 }
 
@@ -44,3 +50,11 @@ extension AuthViewController: WebViewViewControllerDelegate {
     }
 }
 
+extension AuthViewController: AuthViewControllerProtocol {
+    func showWebviewController() {
+        let webviewController = WebViewViewController()
+        webviewController.delegate = self
+        webviewController.modalPresentationStyle = .fullScreen
+        present(webviewController, animated: true)
+    }
+}

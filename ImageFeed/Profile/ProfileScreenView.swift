@@ -34,7 +34,7 @@ final class ProfileScreenView: UIView {
         return stackView
     }()
     
-    private(set) lazy var profileImageView: UIImageView = {
+    private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         let image = UIImage(named: "placeholder")
         imageView.image = image

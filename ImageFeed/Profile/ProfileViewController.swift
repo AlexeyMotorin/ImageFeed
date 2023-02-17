@@ -35,21 +35,20 @@ final class ProfileViewController: UIViewController {
             updateAvatar()
     }
     
+    // MARK: - Override methods
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     
     // MARK: - Private methods
     private func setupView() {
         view.backgroundColor = .ypBackground
-        addView()
-    }
-    
-    private func addView() {
-        view.addSubview(profileScreenView)
-        NSLayoutConstraint.activate([
-            profileScreenView.topAnchor.constraint(equalTo: view.topAnchor),
-            profileScreenView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            profileScreenView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            profileScreenView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        setScreenViewOnViewController(view: profileScreenView)
     }
     
     private func updateProfileDetails(profile: Profile) {

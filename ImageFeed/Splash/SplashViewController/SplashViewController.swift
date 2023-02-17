@@ -34,6 +34,15 @@ final class SplashViewController: UIViewController {
             switchToAuthViewController()
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
         
     private func setupView() {
         view.backgroundColor = .ypBackground
@@ -52,19 +61,18 @@ final class SplashViewController: UIViewController {
     
     // MARK: - Private methods
     private func switchToAuthViewController() {
-        guard let viewController = getAuthViewController() else { return }
+        let viewController = getAuthViewController()
         present(viewController, animated: true)
     }
     
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid configuration")}
-        let storyboard = UIStoryboard(name: SplashVCConstants.storyboardName, bundle: nil)
-        let tabBarVC = storyboard.instantiateViewController(withIdentifier: SplashVCConstants.tabBarIdentifier)
+        let tabBarVC = TabBarController()
         window.rootViewController = tabBarVC
     }
     
-    private func getAuthViewController() -> UINavigationController? {
-        guard let authViewController = UIStoryboard(name: SplashVCConstants.storyboardName, bundle: .main).instantiateViewController(withIdentifier: SplashVCConstants.authViewControllerIdentifier) as? AuthViewController else { return nil }
+    private func getAuthViewController() -> UINavigationController {
+        let authViewController = AuthViewController()
         authViewController.delegate = self
         let navigationController = UINavigationController(rootViewController: authViewController)
         navigationController.modalPresentationStyle = .fullScreen
@@ -87,8 +95,8 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.fetchProfile(token: token)
             case .failure(_):
                 UIBlockingProgressHUD.dismiss()
-                self.showErrorAlert()
                 self.switchToAuthViewController()
+                self.showErrorAlert()
             }
         }
     }
