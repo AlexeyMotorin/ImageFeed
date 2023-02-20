@@ -15,24 +15,18 @@ final class SplashViewController: UIViewController {
     private let oauth2Service = OAuth2Service.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
-    private var alertPresenter: AuthErrorAlertPresenter?
+    private var alertPresenter: ErrorAlertPresenter?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        alertPresenter = ErrorAlertPresenter(delegate: self)
         setupView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        alertPresenter = AuthErrorAlertPresenter(delegate: self)
-        
-        if let token = OAuth2TokenStorage().token {
-            fetchProfile(token: token)
-        } else {
-            switchToAuthViewController()
-        }
+        checkToken()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,6 +71,14 @@ final class SplashViewController: UIViewController {
         let navigationController = UINavigationController(rootViewController: authViewController)
         navigationController.modalPresentationStyle = .fullScreen
         return navigationController
+    }
+    
+    private func checkToken() {
+        if let token = OAuth2TokenStorage().token {
+            fetchProfile(token: token)
+        } else {
+            switchToAuthViewController()
+        }
     }
 }
 
@@ -126,23 +128,26 @@ extension SplashViewController: AuthViewControllerDelegate {
                     .post(name: ProfileImageService.didChangeNotification,
                           object: self,
                           userInfo: ["URL" : profileImageURL])
-            case .failure(let failure):
-                print(failure)
+            case .failure(_):
+                self.showErrorAlert()
             }
         }
     }
     
     private func showErrorAlert() {
-        let alertModel = AuthErrorAlertModel(
+        let alertModel = ErrorAlertModel(
             title: "Что-то пошло не так(",
             message: "Не удалось войти в систему",
-            buttonText: "Ok")
+            buttonText: "Ok", completion: { [weak self] _ in
+                guard let self = self else { return }
+                self.checkToken()
+            })
         
         alertPresenter?.requestShowResultAlert(alertModel: alertModel)
-    }
+    }    
 }
 
-extension SplashViewController: AuthErrorAlertPresenterDelegate {
+extension SplashViewController: ErrorAlertPresenterDelegate {
     func showErrorAlert(alertController: UIAlertController?) {
         guard let alertController = alertController else { return }
         present(alertController, animated: true)

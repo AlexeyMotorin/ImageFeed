@@ -35,7 +35,8 @@ final class WebViewViewController: UIViewController {
         setScreenViewOnViewController(view: webviewScreen)
         
         guard let request = createRequest() else {
-            fatalError("Ошибка запроса для авторизации")
+            assertionFailure("Ошибка запроса для авторизации")
+            return
         }
         
         webviewScreen.loadWebview(request: request)

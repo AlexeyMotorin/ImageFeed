@@ -1,15 +1,15 @@
 import UIKit
 
-final class AuthErrorAlertPresenter {
-    private weak var delegate: AuthErrorAlertPresenterDelegate?
+final class ErrorAlertPresenter {
+    private weak var delegate: ErrorAlertPresenterDelegate?
     
-    init(delegate: AuthErrorAlertPresenterDelegate) {
+    init(delegate: ErrorAlertPresenterDelegate) {
         self.delegate = delegate
     }
 }
 
-extension AuthErrorAlertPresenter: AuthErrorAlertPresenterProtocol {
-    func requestShowResultAlert(alertModel: AuthErrorAlertModel?) {
+extension ErrorAlertPresenter: ErrorAlertPresenterProtocol {
+    func requestShowResultAlert(alertModel: ErrorAlertModel?) {
         let vc = UIAlertController(title: alertModel?.title, message: alertModel?.message, preferredStyle: .alert)
         let action = UIAlertAction(title: alertModel?.buttonText, style: .default)
         vc.addAction(action)

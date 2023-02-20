@@ -1,7 +1,8 @@
 import UIKit
 
-struct AuthErrorAlertModel {
+struct ErrorAlertModel {
     let title: String
     let message: String
     let buttonText: String
+    let completion: ((UIAlertAction) -> Void)?
 }

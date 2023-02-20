@@ -1,5 +1,5 @@
 import UIKit
 
-protocol AuthErrorAlertPresenterDelegate: AnyObject {
+protocol ErrorAlertPresenterDelegate: AnyObject {
     func showErrorAlert(alertController: UIAlertController?)
 }

@@ -40,7 +40,6 @@ final class ImagesListCell: UITableViewCell {
     
     private func setupView() {
         backgroundColor = .ypBlack
-       // contentView.backgroundColor = .ypBlack
         contentView.addSubviews(cellImageView, likeButton, dateLabel)
         
         NSLayoutConstraint.activate([

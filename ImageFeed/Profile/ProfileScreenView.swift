@@ -4,6 +4,8 @@ import Kingfisher
 
 final class ProfileScreenView: UIView {
     
+    weak var viewController: ProfileViewControllerProtocol?
+    
     // MARK: - UI object
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -89,6 +91,11 @@ final class ProfileScreenView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    convenience init(viewController: ProfileViewControllerProtocol) {
+        self.init()
+        self.viewController = viewController
+    }
+    
     // MARK: - Public methods
     func updateProfile(from profile: Profile?) {
         guard let profile else { return }
@@ -104,8 +111,8 @@ final class ProfileScreenView: UIView {
             case .success(let value):
                 self.profileImageView.image = value.image
                 self.profileImageView.layer.cornerRadius = self.profileImageView.frame.width / 2
-            case .failure(let error):
-                print(error)
+            case .failure(_):
+                self.viewController?.showAlertGetAvatarError()
             }
         }
     }

@@ -1,23 +1,23 @@
-//
-//  ProfileViewController.swift
-//  ImageFeed
-//
-//  Created by Алексей Моторин on 30.12.2022.
-//
-
 import UIKit
+
+protocol ProfileViewControllerProtocol: AnyObject {
+    func showAlertGetAvatarError()
+}
 
 final class ProfileViewController: UIViewController {
 
     // MARK: - Private properties
-    private var profileScreenView = ProfileScreenView()
+    private var profileScreenView: ProfileScreenView!
     private var profileImageServiceObserver: NSObjectProtocol?
+    private var alertPresenter: ErrorAlertPresenter?
     private let profileService = ProfileService.shared
     
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        profileScreenView = ProfileScreenView(viewController: self)
+        alertPresenter = ErrorAlertPresenter(delegate: self)
         setupView()
         
         if let profile = profileService.profile {
@@ -59,5 +59,27 @@ final class ProfileViewController: UIViewController {
         guard let profileImageURL = ProfileImageService.shared.avatarURL,
               let url = URL(string: profileImageURL) else { return }
         profileScreenView.updateAvatar(url)
+    }
+    
+    private func showImageErrorAlert() {
+        let alertModel = ErrorAlertModel(
+            title: "Что-то пошло не так(",
+            message: "Не удалось загрузить аватар",
+            buttonText: "Ok", completion: nil)
+        
+        alertPresenter?.requestShowResultAlert(alertModel: alertModel)
+    }   
+}
+
+extension ProfileViewController: ProfileViewControllerProtocol {
+    func showAlertGetAvatarError() {
+        showImageErrorAlert()
+    }
+}
+
+extension ProfileViewController: ErrorAlertPresenterDelegate {
+    func showErrorAlert(alertController: UIAlertController?) {
+        guard let alertController = alertController else { return }
+        present(alertController, animated: true)
     }
 }

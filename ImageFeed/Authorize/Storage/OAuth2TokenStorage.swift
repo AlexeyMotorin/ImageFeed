@@ -19,7 +19,7 @@ final class OAuth2TokenStorage {
             guard let newValue else { return }
             let isSucces = keyChainWrapper.set(newValue, forKey: Keys.authToken.rawValue)
             guard isSucces else {
-                print("Ошибка записи токена")
+                assertionFailure("Ошибка записи токена")
                 return
             }
         }

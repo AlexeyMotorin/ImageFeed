@@ -32,8 +32,8 @@ final class AuthViewControllerScreen: UIView {
         super.init(frame: frame)
         self.backgroundColor = .ypBackground
         self.translatesAutoresizingMaskIntoConstraints = false
-        addSabViews()
-        activateConstraint()
+        addSubViews()
+        activateConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -46,16 +46,16 @@ final class AuthViewControllerScreen: UIView {
     }
     
     // MARK: - Private methods
-    private func addSabViews() {
+    private func addSubViews() {
         addSubviews(logoImageView, authButton)
     }
     
-    private func activateConstraint() {
+    private func activateConstraints() {
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             
-            authButton.heightAnchor.constraint(equalToConstant: 44),
+            authButton.heightAnchor.constraint(equalToConstant: 48),
             authButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             authButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             authButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -124)

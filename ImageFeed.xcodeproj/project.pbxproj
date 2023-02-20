@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B08F36E299CBAD000DDA5ED /* AuthErrorAlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B08F36D299CBAD000DDA5ED /* AuthErrorAlertModel.swift */; };
-		5B08F370299CBB9200DDA5ED /* AuthErrorAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B08F36F299CBB9200DDA5ED /* AuthErrorAlertPresenter.swift */; };
+		5B08F36E299CBAD000DDA5ED /* ErrorAlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B08F36D299CBAD000DDA5ED /* ErrorAlertModel.swift */; };
+		5B08F370299CBB9200DDA5ED /* ErrorAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B08F36F299CBB9200DDA5ED /* ErrorAlertPresenter.swift */; };
 		5B08F372299CBBD500DDA5ED /* AuthErrorAlertPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B08F371299CBBD500DDA5ED /* AuthErrorAlertPresenterProtocol.swift */; };
 		5B08F374299CBC7F00DDA5ED /* AuthErrorAlertPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B08F373299CBC7F00DDA5ED /* AuthErrorAlertPresenterDelegate.swift */; };
 		5B08F377299CCECE00DDA5ED /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5B08F376299CCECE00DDA5ED /* Kingfisher */; };
@@ -54,8 +54,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5B08F36D299CBAD000DDA5ED /* AuthErrorAlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorAlertModel.swift; sourceTree = "<group>"; };
-		5B08F36F299CBB9200DDA5ED /* AuthErrorAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorAlertPresenter.swift; sourceTree = "<group>"; };
+		5B08F36D299CBAD000DDA5ED /* ErrorAlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertModel.swift; sourceTree = "<group>"; };
+		5B08F36F299CBB9200DDA5ED /* ErrorAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertPresenter.swift; sourceTree = "<group>"; };
 		5B08F371299CBBD500DDA5ED /* AuthErrorAlertPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorAlertPresenterProtocol.swift; sourceTree = "<group>"; };
 		5B08F373299CBC7F00DDA5ED /* AuthErrorAlertPresenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorAlertPresenterDelegate.swift; sourceTree = "<group>"; };
 		5B54BD07299E1065004B5B79 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -116,22 +116,21 @@
 		5B08F36B299CBA7200DDA5ED /* Splash */ = {
 			isa = PBXGroup;
 			children = (
-				5B08F36C299CBA9D00DDA5ED /* AuthErrorAlertPresenter */,
 				5B54BD0B299E1B49004B5B79 /* SplashViewController */,
 				5BC9864C2992820500998E33 /* UIBlokingProgressHUD.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
 		};
-		5B08F36C299CBA9D00DDA5ED /* AuthErrorAlertPresenter */ = {
+		5B08F36C299CBA9D00DDA5ED /* ErrorAlertPresenter */ = {
 			isa = PBXGroup;
 			children = (
-				5B08F36D299CBAD000DDA5ED /* AuthErrorAlertModel.swift */,
-				5B08F36F299CBB9200DDA5ED /* AuthErrorAlertPresenter.swift */,
+				5B08F36D299CBAD000DDA5ED /* ErrorAlertModel.swift */,
+				5B08F36F299CBB9200DDA5ED /* ErrorAlertPresenter.swift */,
 				5B08F371299CBBD500DDA5ED /* AuthErrorAlertPresenterProtocol.swift */,
 				5B08F373299CBC7F00DDA5ED /* AuthErrorAlertPresenterDelegate.swift */,
 			);
-			path = AuthErrorAlertPresenter;
+			path = ErrorAlertPresenter;
 			sourceTree = "<group>";
 		};
 		5B54BD0B299E1B49004B5B79 /* SplashViewController */ = {
@@ -225,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				5BB39DF92950A595009544A2 /* Application */,
+				5B08F36C299CBA9D00DDA5ED /* ErrorAlertPresenter */,
 				5B08F36B299CBA7200DDA5ED /* Splash */,
 				5BF1E314299AB7D400A0BA08 /* Services */,
 				5BE0A054298A44AF008EA01F /* Authorize */,
@@ -475,7 +475,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B08F370299CBB9200DDA5ED /* AuthErrorAlertPresenter.swift in Sources */,
+				5B08F370299CBB9200DDA5ED /* ErrorAlertPresenter.swift in Sources */,
 				5B54BD08299E1065004B5B79 /* TabBarController.swift in Sources */,
 				5B8CCDD729503B3F002E601E /* ImagesListViewController.swift in Sources */,
 				5BE0A060298A4B38008EA01F /* URLRequest+extension.swift in Sources */,
@@ -512,7 +512,7 @@
 				5BF1E311299AA4D900A0BA08 /* ProfileResult.swift in Sources */,
 				5BC9864D2992820500998E33 /* UIBlokingProgressHUD.swift in Sources */,
 				5BF1E319299AB83800A0BA08 /* ProfileImageService.swift in Sources */,
-				5B08F36E299CBAD000DDA5ED /* AuthErrorAlertModel.swift in Sources */,
+				5B08F36E299CBAD000DDA5ED /* ErrorAlertModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
