@@ -40,17 +40,7 @@ final class SplashViewController: UIViewController {
         
     private func setupView() {
         view.backgroundColor = .ypBackground
-        addView()
-    }
-    
-    private func addView() {
-        view.addSubview(splashScreenView)
-        NSLayoutConstraint.activate([
-            splashScreenView.topAnchor.constraint(equalTo: view.topAnchor),
-            splashScreenView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            splashScreenView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            splashScreenView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        setScreenViewOnViewController(view: splashScreenView)
     }
     
     // MARK: - Private methods
