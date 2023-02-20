@@ -1,7 +1,10 @@
 
 import UIKit
+import Kingfisher
 
 final class ProfileScreenView: UIView {
+    
+    weak var viewController: ProfileViewControllerProtocol?
     
     // MARK: - UI object
     private lazy var stackView: UIStackView = {
@@ -35,11 +38,11 @@ final class ProfileScreenView: UIView {
     
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        let image = UIImage(named: "Photo")
+        let image = UIImage(named: "placeholder")
         imageView.image = image
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = imageView.frame.width / 2
-        imageView.layer.masksToBounds = true
+        imageView.backgroundColor = .clear
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -59,7 +62,7 @@ final class ProfileScreenView: UIView {
         return label
     }()
     
-    private lazy var emailLabel: UILabel = {
+    private lazy var loginNameLabel: UILabel = {
         let label = UILabel()
         label.text = "@ekaterina_nov"
         label.textColor = .ypWhite?.withAlphaComponent(0.5)
@@ -67,7 +70,7 @@ final class ProfileScreenView: UIView {
         return label
     }()
     
-    private lazy var statusLabel: UILabel = {
+    private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Hello, world!"
         label.textColor = .ypWhite
@@ -88,6 +91,32 @@ final class ProfileScreenView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    convenience init(viewController: ProfileViewControllerProtocol) {
+        self.init()
+        self.viewController = viewController
+    }
+    
+    // MARK: - Public methods
+    func updateProfile(from profile: Profile?) {
+        guard let profile else { return }
+        nameLabel.text = profile.name
+        loginNameLabel.text = profile.loginName
+        descriptionLabel.text = profile.bio
+    }
+    
+    func updateAvatar(_ url: URL) {
+        profileImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"), options: nil) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let value):
+                self.profileImageView.image = value.image
+                self.profileImageView.layer.cornerRadius = self.profileImageView.frame.width / 2
+            case .failure(_):
+                self.viewController?.showAlertGetAvatarError()
+            }
+        }
+    }
+    
     // MARK: - Private methods
     private func addSabViews() {
         self.addSubview(stackView)
@@ -98,8 +127,8 @@ final class ProfileScreenView: UIView {
         photoAndExitButtonStackView.addArrangedSubview(exitButton)
         
         lablesStackView.addArrangedSubview(nameLabel)
-        lablesStackView.addArrangedSubview(emailLabel)
-        lablesStackView.addArrangedSubview(statusLabel)
+        lablesStackView.addArrangedSubview(loginNameLabel)
+        lablesStackView.addArrangedSubview(descriptionLabel)
     }
     
     private func activateConstraint() {
