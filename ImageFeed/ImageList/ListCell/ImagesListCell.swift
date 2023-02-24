@@ -1,5 +1,6 @@
 
 import UIKit
+import Kingfisher
 
 final class ImagesListCell: UITableViewCell {
     
@@ -11,6 +12,7 @@ final class ImagesListCell: UITableViewCell {
         imageView.backgroundColor = .clear
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 16
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -59,19 +61,33 @@ final class ImagesListCell: UITableViewCell {
     }
     
     
-    func config(date: String, image: String, likeImage: String) {
+    func config(date: String, imageURL: String, likeImage: String, numberRow: Int) {
         dateLabel.text = date
-        cellImageView.image = UIImage(named: image)
         likeButton.setImage(UIImage(named: likeImage), for: .normal)
+        downloadImage(at: imageURL, numberRow: numberRow)
     }
-    
+        
     override func prepareForReuse() {
-        cellImageView.image = nil
+        cellImageView.kf.cancelDownloadTask()
         dateLabel.text = nil
         likeButton.imageView?.image = nil
     }
     
     @objc private func likeButtonTapped() {
         // TODO: поставить лайк
+    }
+    
+    private func downloadImage(at url: String, numberRow: Int) {
+        guard let url = URL(string: url) else { return }
+        cellImageView.kf.indicatorType = .activity
+        cellImageView.kf.setImage(with: url, placeholder: UIImage(named: "Stub"), options: nil) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let value):
+                self.cellImageView.image = value.image
+            case .failure(_):
+                self.cellImageView.image = UIImage(named: "Stub")
+            }
+        }
     }
 }

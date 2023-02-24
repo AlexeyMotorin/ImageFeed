@@ -19,8 +19,6 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vector" translatesAutoresizingMaskIntoConstraints="NO" id="8eI-kk-LRH">
                                 <rect key="frame" x="170" y="409.5" width="74" height="77"/>
-                                <color key="backgroundColor" name="ypBlack "/>
-                                <color key="tintColor" name="ypBackground"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -40,9 +38,6 @@
         <image name="Vector" width="74" height="77"/>
         <namedColor name="ypBackground">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-        <namedColor name="ypBlack ">
-            <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -15,7 +15,7 @@ final class ImageListService {
     
     private(set) var photos: [Photo] = []
     
-    private var lastLoadedPage: Int?
+    static var lastLoadedPage: Int?
     
     func fetchPhotosNextPage() {
         
@@ -23,10 +23,12 @@ final class ImageListService {
         
         var nextPage: Int
         
-        if let lastLoadedPage {
+        if let lastLoadedPage = ImageListService.lastLoadedPage {
             nextPage = lastLoadedPage + 1
+            ImageListService.lastLoadedPage = nextPage
         } else {
             nextPage = 1
+            ImageListService.lastLoadedPage = nextPage
         }
         
         guard let token = OAuth2TokenStorage().token else { return }
@@ -39,6 +41,9 @@ final class ImageListService {
                 case .success(let photoResult):
                     photoResult.forEach { result in
                         let photo = self.getPhoto(from: result)
+                        if !self.photos.contains(photo) {
+                            self.photos.append(photo)
+                        }
                     }
                     NotificationCenter.default.post(
                         name: ImageListService.didChangeNotification,
@@ -58,11 +63,10 @@ final class ImageListService {
     
     private func imageListRequest(numberPage: Int, token: String) -> URLRequest {
         var request = URLRequest.makeHTTPRequest(
-            path: "/photos",
+            path: "/photos" + "?page=\(numberPage)",
             httpMethod: "GET",
             baseURL: Constants.apiBaseURL)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.setValue("\(numberPage)", forHTTPHeaderField: "page")
         return request
     }
     

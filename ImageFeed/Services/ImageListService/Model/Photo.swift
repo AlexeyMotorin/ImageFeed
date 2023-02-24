@@ -9,3 +9,9 @@ struct Photo {
     let largeImageURL: String
     let isLiked: Bool
 }
+
+extension Photo: Equatable {
+    static func == (lrh: Photo, rhs: Photo) -> Bool {
+        lrh.id == rhs.id ? true : false
+    }
+}
