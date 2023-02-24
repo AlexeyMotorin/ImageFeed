@@ -2,9 +2,15 @@
 import UIKit
 import Kingfisher
 
+protocol ImagesListCellDelegate: AnyObject {
+    func imageListCellDidTipeLike(_ cell: ImagesListCell)
+}
+
 final class ImagesListCell: UITableViewCell {
     
     static let reuseIdentifier = "ImagesListCell"
+    
+    weak var delegate: ImagesListCellDelegate?
     
     private lazy var cellImageView: UIImageView = {
         let imageView = UIImageView()
@@ -66,6 +72,14 @@ final class ImagesListCell: UITableViewCell {
         likeButton.setImage(UIImage(named: likeImage), for: .normal)
         downloadImage(at: imageURL, numberRow: numberRow)
     }
+
+    func setIsLiked(isLiked: Bool) {
+        let likeImage: String = isLiked ? "IsLike" : "NoLike"
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.likeButton.setImage(UIImage(named: likeImage), for: .normal)
+        }
+    }
         
     override func prepareForReuse() {
         cellImageView.kf.cancelDownloadTask()
@@ -74,7 +88,7 @@ final class ImagesListCell: UITableViewCell {
     }
     
     @objc private func likeButtonTapped() {
-        // TODO: поставить лайк
+        delegate?.imageListCellDidTipeLike(self)
     }
     
     private func downloadImage(at url: String, numberRow: Int) {

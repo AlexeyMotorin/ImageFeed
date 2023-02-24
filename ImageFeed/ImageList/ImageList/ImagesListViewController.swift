@@ -86,11 +86,11 @@ extension ImagesListViewController: UITableViewDataSource {
         
         guard
             let imagesListCell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath) as? ImagesListCell else { return UITableViewCell() }
-        
+        imagesListCell.delegate = self
         let photo = photos[indexPath.row]
         let date = dateFormatter.string(from: photo.createdAt ?? Date())
         let image = photo.thumbImageURL
-        let isLikedImage: String = photo.isLiked ? "NoLike" : "IsLike"
+        let isLikedImage: String = photo.isLiked ? "IsLike" : "NoLike" 
         imagesListCell.config(date: date, imageURL: image, likeImage: isLikedImage, numberRow: indexPath.row)
         imagesListCell.selectionStyle = .none
         return imagesListCell
@@ -128,4 +128,22 @@ extension ImagesListViewController: UITableViewDelegate {
     }
 }
 
-
+extension ImagesListViewController: ImagesListCellDelegate {
+    func imageListCellDidTipeLike(_ cell: ImagesListCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let photo = photos[indexPath.row]
+        
+        UIBlockingProgressHUD.show()
+        imageListService.changeLIke(idPhoto: photo.id, isLike: !photo.isLiked) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.photos = self.imageListService.photos
+                cell.setIsLiked(isLiked: self.photos[indexPath.row].isLiked)
+                UIBlockingProgressHUD.dismiss()
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+    }
+}
