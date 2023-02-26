@@ -4,6 +4,7 @@ import Kingfisher
 
 protocol ImagesListCellDelegate: AnyObject {
     func imageListCellDidTipeLike(_ cell: ImagesListCell)
+    func reloadCellHeight(numberRow: Int)
 }
 
 final class ImagesListCell: UITableViewCell {
@@ -11,7 +12,7 @@ final class ImagesListCell: UITableViewCell {
     static let reuseIdentifier = "ImagesListCell"
     
     weak var delegate: ImagesListCellDelegate?
-    
+        
     private lazy var cellImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -49,13 +50,13 @@ final class ImagesListCell: UITableViewCell {
     private func setupView() {
         backgroundColor = .ypBlack
         contentView.addSubviews(cellImageView, likeButton, dateLabel)
-        
+                
         NSLayoutConstraint.activate([
             cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             cellImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             cellImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
             cellImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
-            
+        
             likeButton.widthAnchor.constraint(equalToConstant: 44),
             likeButton.heightAnchor.constraint(equalToConstant: 44),
             likeButton.rightAnchor.constraint(equalTo: cellImageView.rightAnchor, constant: -10),
@@ -72,7 +73,7 @@ final class ImagesListCell: UITableViewCell {
         likeButton.setImage(UIImage(named: likeImage), for: .normal)
         downloadImage(at: imageURL, numberRow: numberRow)
     }
-
+    
     func setIsLiked(isLiked: Bool) {
         let likeImage: String = isLiked ? "IsLike" : "NoLike"
         DispatchQueue.main.async { [weak self] in
@@ -80,7 +81,7 @@ final class ImagesListCell: UITableViewCell {
             self.likeButton.setImage(UIImage(named: likeImage), for: .normal)
         }
     }
-        
+    
     override func prepareForReuse() {
         cellImageView.kf.cancelDownloadTask()
         dateLabel.text = nil
@@ -99,6 +100,7 @@ final class ImagesListCell: UITableViewCell {
             switch result {
             case .success(let value):
                 self.cellImageView.image = value.image
+                self.delegate?.reloadCellHeight(numberRow: numberRow)
             case .failure(_):
                 self.cellImageView.image = UIImage(named: "Stub")
             }

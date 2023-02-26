@@ -15,12 +15,12 @@ final class SplashViewController: UIViewController {
     private let oauth2Service = OAuth2Service.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
-    private var alertPresenter: ErrorAlertPresenter?
+    private var alertPresenter: ErrorAuthAlertPresenter?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        alertPresenter = ErrorAlertPresenter(delegate: self)
+        alertPresenter = ErrorAuthAlertPresenter(delegate: self)
         setupView()
     }
     

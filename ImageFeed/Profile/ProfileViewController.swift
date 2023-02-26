@@ -1,23 +1,26 @@
 import UIKit
+import WebKit
 
 protocol ProfileViewControllerProtocol: AnyObject {
     func showAlertGetAvatarError()
+    func logoutProfile()
 }
 
 final class ProfileViewController: UIViewController {
-
+    
     // MARK: - Private properties
     private var profileScreenView: ProfileScreenView!
     private var profileImageServiceObserver: NSObjectProtocol?
-    private var alertPresenter: ErrorAlertPresenter?
+    private var errorAlertPresenter: ErrorAuthAlertPresenterProtocol?
+    private var logoutAlertPresenter: LogoutAlertPresenterProtocol?
     private let profileService = ProfileService.shared
-    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         profileScreenView = ProfileScreenView(viewController: self)
-        alertPresenter = ErrorAlertPresenter(delegate: self)
+        errorAlertPresenter = ErrorAuthAlertPresenter(delegate: self)
+        logoutAlertPresenter = LogoutAlertPresenter(delegate: self)
         setupView()
         
         if let profile = profileService.profile {
@@ -32,7 +35,7 @@ final class ProfileViewController: UIViewController {
                 guard let self = self else { return }
                 self.updateAvatar()
             })
-            updateAvatar()
+        updateAvatar()
     }
     
     // MARK: - Override methods
@@ -61,24 +64,65 @@ final class ProfileViewController: UIViewController {
         profileScreenView.updateAvatar(url)
     }
     
+    private func showLogoutAlert() {
+        let alertModel = LogoutAlertModel(
+            title: "Пока, пока!",
+            message: "Уверены, что хотите выйти?",
+            buttonText: "Да") { [weak self] _ in
+                guard let self = self else { return }
+                UIBlockingProgressHUD.show()
+                OAuth2TokenStorage().removeToken()
+                self.cleanCookies()
+                self.showAuthViewController()
+                UIBlockingProgressHUD.dismiss()
+            }
+        logoutAlertPresenter?.requestShowLogoutAlert(alertModel: alertModel)
+    }
+    
+    private func showAuthViewController() {
+        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid configuration")}
+        let tabBarVC = AuthViewController()
+        window.rootViewController = tabBarVC
+    }
+    
+    private func cleanCookies() {
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            records.forEach { record in
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+            }
+        }
+    }
+}
+
+extension ProfileViewController: ProfileViewControllerProtocol {
+    func logoutProfile() {
+        showLogoutAlert()
+    }
+    
+    func showAlertGetAvatarError() {
+        showImageErrorAlert()
+    }
+    
     private func showImageErrorAlert() {
         let alertModel = ErrorAlertModel(
             title: "Что-то пошло не так(",
             message: "Не удалось загрузить аватар",
             buttonText: "Ok", completion: nil)
         
-        alertPresenter?.requestShowResultAlert(alertModel: alertModel)
-    }   
-}
-
-extension ProfileViewController: ProfileViewControllerProtocol {
-    func showAlertGetAvatarError() {
-        showImageErrorAlert()
+        errorAlertPresenter?.requestShowResultAlert(alertModel: alertModel)
     }
 }
 
 extension ProfileViewController: ErrorAlertPresenterDelegate {
     func showErrorAlert(alertController: UIAlertController?) {
+        guard let alertController = alertController else { return }
+        present(alertController, animated: true)
+    }
+}
+
+extension ProfileViewController: LogoutAlertPresenterDelegate {
+    func showLogoutAlert(alertController: UIAlertController?) {
         guard let alertController = alertController else { return }
         present(alertController, animated: true)
     }

@@ -149,6 +149,6 @@ final class ProfileScreenView: UIView {
     }
     
     @objc private func didExitButtonTapped() {
-        // выход из аккаунта
+        viewController?.logoutProfile()
     }
 }

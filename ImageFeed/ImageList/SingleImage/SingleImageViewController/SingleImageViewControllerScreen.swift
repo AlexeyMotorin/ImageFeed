@@ -1,21 +1,16 @@
 import UIKit
+import Kingfisher
 
 final class SingleImageViewControllerScreen: UIView {
     
     weak var viewController: SingleImageViewControllerProtocol?
-    
+
     // MARK: - UI object
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = .black
         return scrollView
-    }()
-    
-    private lazy var contentView: UIView = {
-        let contenView = UIView()
-        contenView.translatesAutoresizingMaskIntoConstraints = false
-        return contenView
     }()
     
     private lazy var imageView: UIImageView = {
@@ -25,7 +20,7 @@ final class SingleImageViewControllerScreen: UIView {
         imageView.clipsToBounds = true
         return imageView
     }()
-    
+        
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -39,6 +34,7 @@ final class SingleImageViewControllerScreen: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "Sharing"), for: .normal)
         button.addTarget(self, action: #selector(sharingButtonTapped), for: .touchUpInside)
+        button.isEnabled = false
         return button
     }()
     
@@ -61,10 +57,27 @@ final class SingleImageViewControllerScreen: UIView {
     }
     
     // MARK: - Public methods
-    func setImage(_ image: UIImage?) {
-        guard let image = image else { return }
-        rescaleAndCenterImageInScrollView(image: image)
-        imageView.image = image
+    func fetchImage(_ imageURL: String?) {
+        guard
+            let urlString = imageURL,
+            let url = URL(string: urlString) else {
+            self.viewController?.showAlertLoadImageError()
+            return
+        }
+        
+        UIBlockingProgressHUD.show()
+        imageView.kf.setImage(with: url, options: nil) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let value):
+                self.imageView.image = value.image
+                self.rescaleAndCenterImageInScrollView(image: value.image)
+                self.sharedButton.isEnabled = true
+                case .failure(_):
+                self.viewController?.showAlertLoadImageError()
+            }
+            UIBlockingProgressHUD.dismiss()
+        }
     }
     
     // MARK: - Private methods
@@ -75,8 +88,7 @@ final class SingleImageViewControllerScreen: UIView {
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 1.25
         
-        scrollView.addSubview(contentView)
-        contentView.addSubviews(imageView)
+        scrollView.addSubview(imageView)
     }
     
     private func activateConstraint() {
@@ -85,15 +97,11 @@ final class SingleImageViewControllerScreen: UIView {
             scrollView.widthAnchor.constraint(equalTo: widthAnchor),
             scrollView.topAnchor.constraint(equalTo: topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            contentView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+           
+            imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
             backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             backButton.topAnchor.constraint(equalTo: topAnchor, constant: 54),
@@ -123,8 +131,9 @@ final class SingleImageViewControllerScreen: UIView {
         let y = (newContentSize.height - visibleRectSize.height) / 2
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
     }
-    
+        
     @objc private func didBackButtonTapped() {
+        imageView.kf.cancelDownloadTask()
         viewController?.dismissViewController()
     }
     

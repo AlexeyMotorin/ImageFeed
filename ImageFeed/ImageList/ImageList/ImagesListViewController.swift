@@ -86,11 +86,11 @@ extension ImagesListViewController: UITableViewDataSource {
         
         guard
             let imagesListCell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath) as? ImagesListCell else { return UITableViewCell() }
-        imagesListCell.delegate = self
         let photo = photos[indexPath.row]
         let date = dateFormatter.string(from: photo.createdAt ?? Date())
         let image = photo.thumbImageURL
-        let isLikedImage: String = photo.isLiked ? "IsLike" : "NoLike" 
+        let isLikedImage: String = photo.isLiked ? "IsLike" : "NoLike"
+        imagesListCell.delegate = self
         imagesListCell.config(date: date, imageURL: image, likeImage: isLikedImage, numberRow: indexPath.row)
         imagesListCell.selectionStyle = .none
         return imagesListCell
@@ -100,25 +100,16 @@ extension ImagesListViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let photo = photos[indexPath.row]
-        let photoSize = photo.size
-        let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
-        let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
-        let imageWidth = photo.size.width
-        let scale = imageViewWidth / imageWidth
-        let cellHeight = photoSize.height * scale + imageInsets.top + imageInsets.bottom
-        return cellHeight
+        UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        tableView.deselectRow(at: indexPath, animated: true)
-        //
-        //        let imageName = photoNames[indexPath.row]
-        //        let image = UIImage(named: imageName)
-        //        let singleImageViewController = SingleImageViewController()
-        //        singleImageViewController.image = image
-        //        singleImageViewController.modalPresentationStyle = .fullScreen
-        //        present(singleImageViewController, animated: true)
+        let photo = photos[indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
+        let singleImageViewController = SingleImageViewController()
+        singleImageViewController.imageURL = photo.largeImageURL
+        singleImageViewController.modalPresentationStyle = .fullScreen
+        present(singleImageViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -129,6 +120,14 @@ extension ImagesListViewController: UITableViewDelegate {
 }
 
 extension ImagesListViewController: ImagesListCellDelegate {
+    func reloadCellHeight(numberRow: Int) {
+        let indexPath = IndexPath(item: numberRow, section: 0)
+
+        tableView.performBatchUpdates {
+            tableView.reloadRows(at: [indexPath], with: .automatic )
+        }
+    }
+    
     func imageListCellDidTipeLike(_ cell: ImagesListCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let photo = photos[indexPath.row]

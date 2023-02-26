@@ -81,7 +81,7 @@ final class WebViewControllerScreen: UIView {
             
             progressView.leadingAnchor.constraint(equalTo: leadingAnchor),
             progressView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            progressView.topAnchor.constraint(equalTo: backButton.bottomAnchor)
+            progressView.topAnchor.constraint(equalTo: backButton.topAnchor)
         ])
     }
     

@@ -1,6 +1,6 @@
 import UIKit
 
-final class ErrorAlertPresenter {
+final class ErrorAuthAlertPresenter {
     private weak var delegate: ErrorAlertPresenterDelegate?
     
     init(delegate: ErrorAlertPresenterDelegate) {
@@ -8,10 +8,10 @@ final class ErrorAlertPresenter {
     }
 }
 
-extension ErrorAlertPresenter: ErrorAlertPresenterProtocol {
+extension ErrorAuthAlertPresenter: ErrorAuthAlertPresenterProtocol {
     func requestShowResultAlert(alertModel: ErrorAlertModel?) {
         let vc = UIAlertController(title: alertModel?.title, message: alertModel?.message, preferredStyle: .alert)
-        let action = UIAlertAction(title: alertModel?.buttonText, style: .default)
+        let action = UIAlertAction(title: alertModel?.buttonText, style: .default, handler: alertModel?.completion)
         vc.addAction(action)
         delegate?.showErrorAlert(alertController: vc)
     }
