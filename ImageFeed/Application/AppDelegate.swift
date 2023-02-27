@@ -14,10 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         ProgressHUD.animationType = .systemActivityIndicator
         ProgressHUD.colorHUD = .black
-        ProgressHUD.colorBackground = .black
-        ProgressHUD.colorStatus = .black
-        ProgressHUD.colorProgress = .black
-        ProgressHUD.colorAnimation = .red
+        ProgressHUD.colorAnimation = .lightGray
         return true
     }
 

@@ -1,9 +1,13 @@
 import UIKit
 import Kingfisher
+import ProgressHUD
 
 final class SingleImageViewControllerScreen: UIView {
     
     weak var viewController: SingleImageViewControllerProtocol?
+    
+    // при отмене загрузки картинки (тап кнопки выхода) срабатывает case failure в imageView.kf.setImage, чтобы не показывать алерт с ошибкой ставим флаг
+    private var needShowErrorAlert = true
 
     // MARK: - UI object
     private lazy var scrollView: UIScrollView = {
@@ -64,8 +68,8 @@ final class SingleImageViewControllerScreen: UIView {
             self.viewController?.showAlertLoadImageError()
             return
         }
-        
-        UIBlockingProgressHUD.show()
+
+        ProgressHUD.show()
         imageView.kf.setImage(with: url, options: nil) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -73,10 +77,13 @@ final class SingleImageViewControllerScreen: UIView {
                 self.imageView.image = value.image
                 self.rescaleAndCenterImageInScrollView(image: value.image)
                 self.sharedButton.isEnabled = true
-                case .failure(_):
-                self.viewController?.showAlertLoadImageError()
+            case .failure(_):
+                if self.needShowErrorAlert {
+                    self.viewController?.showAlertLoadImageError()
+                    self.needShowErrorAlert = true
+                }
             }
-            UIBlockingProgressHUD.dismiss()
+            ProgressHUD.dismiss()
         }
     }
     
@@ -133,6 +140,7 @@ final class SingleImageViewControllerScreen: UIView {
     }
         
     @objc private func didBackButtonTapped() {
+        needShowErrorAlert = false
         imageView.kf.cancelDownloadTask()
         viewController?.dismissViewController()
     }
