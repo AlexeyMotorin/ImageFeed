@@ -20,7 +20,7 @@ final class ImagesListViewController: UIViewController {
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateStyle = .long
+        formatter.dateStyle = .medium
         formatter.timeStyle = .none
         return formatter
     }()
@@ -87,11 +87,19 @@ extension ImagesListViewController: UITableViewDataSource {
         guard
             let imagesListCell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath) as? ImagesListCell else { return UITableViewCell() }
         let photo = photos[indexPath.row]
-        let date = dateFormatter.string(from: photo.createdAt ?? Date())
+        
+        var dateString: String
+        
+        if let date = photo.createdAt {
+            dateString = dateFormatter.string(from: date)
+        } else {
+            dateString = ""
+        }
+        
         let image = photo.thumbImageURL
         let isLikedImage: String = photo.isLiked ? "IsLike" : "NoLike"
         imagesListCell.delegate = self
-        imagesListCell.config(date: date, imageURL: image, likeImage: isLikedImage, numberRow: indexPath.row)
+        imagesListCell.config(date: dateString, imageURL: image, likeImage: isLikedImage, numberRow: indexPath.row)
         imagesListCell.selectionStyle = .none
         return imagesListCell
     }
@@ -105,7 +113,6 @@ extension ImagesListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let photo = photos[indexPath.row]
-        tableView.deselectRow(at: indexPath, animated: true)
         let singleImageViewController = SingleImageViewController()
         singleImageViewController.imageURL = photo.largeImageURL
         singleImageViewController.modalPresentationStyle = .fullScreen

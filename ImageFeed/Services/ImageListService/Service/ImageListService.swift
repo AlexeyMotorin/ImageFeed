@@ -79,7 +79,15 @@ final class ImageListService {
     
     private func getPhoto(from result: PhotoResult) -> Photo {
         let imageSize = CGSize(width: CGFloat(result.width), height: CGFloat(result.height))
-        let createdDate = DateFormatter().date(from: result.createdAt)
+        
+        var createdDate: Date?
+        
+        if let dateString = result.createdAt {
+            createdDate = ISO8601DateFormatter().date(from: dateString)
+        } else {
+            createdDate = nil
+        }
+        
         let photo = Photo(id: result.id,
                           size: imageSize,
                           createdAt: createdDate,
