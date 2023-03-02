@@ -29,7 +29,7 @@ final class ImagesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        imageListService.fetchPhotosNextPage()
+//        imageListService.fetchPhotosNextPage()
         
         imageListServiceObserver = NotificationCenter.default
             .addObserver(forName: ImageListService.didChangeNotification,
@@ -135,12 +135,12 @@ extension ImagesListViewController: ImagesListCellDelegate {
         }
     }
     
-    func imageListCellDidTipeLike(_ cell: ImagesListCell) {
+    func imageListCellDidTapeLike(_ cell: ImagesListCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let photo = photos[indexPath.row]
         
         UIBlockingProgressHUD.show()
-        imageListService.changeLIke(idPhoto: photo.id, isLike: !photo.isLiked) { [weak self] result in
+        imageListService.changeLike(idPhoto: photo.id, isLike: !photo.isLiked) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:
@@ -149,6 +149,7 @@ extension ImagesListViewController: ImagesListCellDelegate {
                 UIBlockingProgressHUD.dismiss()
             case .failure(let failure):
                 print(failure)
+                UIBlockingProgressHUD.dismiss()
             }
         }
     }

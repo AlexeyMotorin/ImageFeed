@@ -7,15 +7,17 @@ final class ImageListService {
     
     // MARK: - Static properties
     static let didChangeNotification = Notification.Name(rawValue: "ImageListServiceDidChange")
-    static var lastLoadedPage: Int?
-    
+   
     // MARK: - Private enum
     private enum HttpMethods: String {
-        case GET, POST, DELETE
+        case get = "GET"
+        case post = "POST"
+        case delete = "DELETE"
     }
     
     // MARK: - Private properties
     private let urlSession = URLSession.shared
+    private var lastLoadedPage: Int?
     
     //указатель на активную задачу, если задач нет, значение = nil. Значение присваивается до task.resume(), при успешном выполнении обнуляется
     private var task: URLSessionTask?
@@ -28,15 +30,15 @@ final class ImageListService {
         
         var nextPage: Int
         
-        if let lastLoadedPage = ImageListService.lastLoadedPage {
+        if let lastLoadedPage = lastLoadedPage {
             nextPage = lastLoadedPage + 1
-            ImageListService.lastLoadedPage = nextPage
+            self.lastLoadedPage = nextPage
         } else {
             nextPage = 1
-            ImageListService.lastLoadedPage = nextPage
+            self.lastLoadedPage = nextPage
         }
         
-        guard let token = OAuth2TokenStorage().token else { return }
+        guard let token = OAuth2TokenStorage.shared.token else { return }
         let request = imageListRequest(numberPage: nextPage, token: token)
         
         let task = urlSession.objectTask(for: request) { [weak self] (result: Result<[PhotoResult], Error>) in
@@ -55,11 +57,10 @@ final class ImageListService {
                         name: ImageListService.didChangeNotification,
                         object: self,
                         userInfo: ["photos" : self.photos])
-                    self.task = nil
                 case .failure(let error):
                     print(error)
-                    self.task = nil
                 }
+                self.task = nil
             }
         }
         
@@ -71,7 +72,7 @@ final class ImageListService {
     private func imageListRequest(numberPage: Int, token: String) -> URLRequest {
         var request = URLRequest.makeHTTPRequest(
             path: "/photos" + "?page=\(numberPage)",
-            httpMethod: HttpMethods.GET.rawValue,
+            httpMethod: HttpMethods.get.rawValue,
             baseURL: Constants.apiBaseURL)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
@@ -84,9 +85,7 @@ final class ImageListService {
         
         if let dateString = result.createdAt {
             createdDate = ISO8601DateFormatter().date(from: dateString)
-        } else {
-            createdDate = nil
-        }
+        } 
         
         let photo = Photo(id: result.id,
                           size: imageSize,
@@ -103,12 +102,12 @@ final class ImageListService {
 // MARK: - Change like
 extension ImageListService {
     // MARK: - Public properties
-    func changeLIke(idPhoto: String, isLike: Bool, completion: @escaping (Result<Void, Error>) -> Void) {
+    func changeLike(idPhoto: String, isLike: Bool, completion: @escaping (Result<Void, Error>) -> Void) {
         assert(Thread.isMainThread)
         task?.cancel()
-        guard let token = OAuth2TokenStorage().token else { return }
+        guard let token = OAuth2TokenStorage.shared.token else { return }
         
-        let httpMethod = isLike ? HttpMethods.POST.rawValue : HttpMethods.DELETE.rawValue
+        let httpMethod = isLike ? HttpMethods.post.rawValue : HttpMethods.delete.rawValue
         let request = likeRequest(id: idPhoto, httpMethod: httpMethod, token: token)
         
         let task = urlSession.dataTask(with: request) { [weak self] _, response, error in

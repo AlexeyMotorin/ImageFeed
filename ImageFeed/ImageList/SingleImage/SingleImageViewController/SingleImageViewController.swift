@@ -49,6 +49,10 @@ final class SingleImageViewController: UIViewController {
     
         alertPresenter?.requestShowErrorLoadImageAlert(alertModel: alertModel)
     }
+    
+    deinit {
+        print("deinit")
+    }
 }
 
 // MARK: - SharingPresenterDelegate

@@ -3,7 +3,7 @@ import UIKit
 import Kingfisher
 
 protocol ImagesListCellDelegate: AnyObject {
-    func imageListCellDidTipeLike(_ cell: ImagesListCell)
+    func imageListCellDidTapeLike(_ cell: ImagesListCell)
     func reloadCellHeight(numberRow: Int)
 }
 
@@ -89,7 +89,7 @@ final class ImagesListCell: UITableViewCell {
     }
     
     @objc private func likeButtonTapped() {
-        delegate?.imageListCellDidTipeLike(self)
+        delegate?.imageListCellDidTapeLike(self)
     }
     
     private func downloadImage(at url: String, numberRow: Int) {

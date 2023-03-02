@@ -64,7 +64,7 @@ final class SplashViewController: UIViewController {
     }
     
     private func checkToken() {
-        if let token = OAuth2TokenStorage().token {
+        if let token = OAuth2TokenStorage.shared.token {
             UIBlockingProgressHUD.show()
             fetchProfile(token: token)
         } else {

@@ -71,7 +71,7 @@ final class ProfileViewController: UIViewController {
             buttonText: "Да") { [weak self] _ in
                 guard let self = self else { return }
                 UIBlockingProgressHUD.show()
-                OAuth2TokenStorage().removeToken()
+                OAuth2TokenStorage.shared.removeToken()
                 self.cleanCookies()
                 self.showAuthViewController()
                 UIBlockingProgressHUD.dismiss()
