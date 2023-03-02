@@ -1,5 +1,5 @@
 import Foundation
 
-protocol ErrorAlertPresenterProtocol: AnyObject {
+protocol ErrorAuthAlertPresenterProtocol: AnyObject {
     func requestShowResultAlert(alertModel: ErrorAlertModel?)
 }

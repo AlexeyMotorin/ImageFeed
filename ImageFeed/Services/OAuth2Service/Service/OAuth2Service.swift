@@ -16,8 +16,8 @@ final class OAuth2Service {
     private var lastCode: String?
     
     private (set) var authToken: String? {
-        get { OAuth2TokenStorage().token }
-        set { OAuth2TokenStorage().token = newValue }
+        get { OAuth2TokenStorage.shared.token }
+        set { OAuth2TokenStorage.shared.token = newValue }
     }
     
     // MARK: - Public methods

@@ -3,6 +3,10 @@ import SwiftKeychainWrapper
 
 /// Класс отвечает за хранение bearer token
 final class OAuth2TokenStorage {
+    // MARK: Singletone
+    static let shared = OAuth2TokenStorage()
+    private init() {}
+    
     
     // MARK: Private enum
     private enum Keys: String {
@@ -23,5 +27,9 @@ final class OAuth2TokenStorage {
                 return
             }
         }
+    }
+    
+    func removeToken() {
+        KeychainWrapper.standard.removeObject(forKey: Keys.authToken.rawValue)
     }
 }

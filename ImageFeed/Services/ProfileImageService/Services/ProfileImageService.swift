@@ -19,7 +19,7 @@ final class ProfileImageService {
         assert(Thread.isMainThread)
         task?.cancel()
         
-        guard let token = OAuth2TokenStorage().token else { return }
+        guard let token = OAuth2TokenStorage.shared.token else { return }
         
         let request = profileImageRequest(with: userName, token: token)
         

@@ -15,12 +15,12 @@ final class SplashViewController: UIViewController {
     private let oauth2Service = OAuth2Service.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
-    private var alertPresenter: ErrorAlertPresenter?
+    private var alertPresenter: ErrorAuthAlertPresenter?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        alertPresenter = ErrorAlertPresenter(delegate: self)
+        alertPresenter = ErrorAuthAlertPresenter(delegate: self)
         setupView()
     }
     
@@ -40,17 +40,7 @@ final class SplashViewController: UIViewController {
         
     private func setupView() {
         view.backgroundColor = .ypBackground
-        addView()
-    }
-    
-    private func addView() {
-        view.addSubview(splashScreenView)
-        NSLayoutConstraint.activate([
-            splashScreenView.topAnchor.constraint(equalTo: view.topAnchor),
-            splashScreenView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            splashScreenView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            splashScreenView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        setScreenViewOnViewController(view: splashScreenView)
     }
     
     // MARK: - Private methods
@@ -74,7 +64,8 @@ final class SplashViewController: UIViewController {
     }
     
     private func checkToken() {
-        if let token = OAuth2TokenStorage().token {
+        if let token = OAuth2TokenStorage.shared.token {
+            UIBlockingProgressHUD.show()
             fetchProfile(token: token)
         } else {
             switchToAuthViewController()

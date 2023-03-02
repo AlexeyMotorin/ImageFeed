@@ -110,7 +110,7 @@ final class ProfileScreenView: UIView {
             switch result {
             case .success(let value):
                 self.profileImageView.image = value.image
-                self.profileImageView.layer.cornerRadius = self.profileImageView.frame.width / 2
+                self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
             case .failure(_):
                 self.viewController?.showAlertGetAvatarError()
             }
@@ -149,6 +149,6 @@ final class ProfileScreenView: UIView {
     }
     
     @objc private func didExitButtonTapped() {
-        // выход из аккаунта
+        viewController?.logoutProfile()
     }
 }

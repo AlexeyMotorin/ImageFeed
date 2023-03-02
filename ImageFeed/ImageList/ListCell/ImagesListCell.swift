@@ -1,16 +1,25 @@
 
 import UIKit
+import Kingfisher
+
+protocol ImagesListCellDelegate: AnyObject {
+    func imageListCellDidTapeLike(_ cell: ImagesListCell)
+    func reloadCellHeight(numberRow: Int)
+}
 
 final class ImagesListCell: UITableViewCell {
     
     static let reuseIdentifier = "ImagesListCell"
     
+    weak var delegate: ImagesListCellDelegate?
+        
     private lazy var cellImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .clear
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 16
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -41,13 +50,13 @@ final class ImagesListCell: UITableViewCell {
     private func setupView() {
         backgroundColor = .ypBlack
         contentView.addSubviews(cellImageView, likeButton, dateLabel)
-        
+                
         NSLayoutConstraint.activate([
             cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             cellImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             cellImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
             cellImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
-            
+        
             likeButton.widthAnchor.constraint(equalToConstant: 44),
             likeButton.heightAnchor.constraint(equalToConstant: 44),
             likeButton.rightAnchor.constraint(equalTo: cellImageView.rightAnchor, constant: -10),
@@ -59,19 +68,42 @@ final class ImagesListCell: UITableViewCell {
     }
     
     
-    func config(date: String, image: String, likeImage: String) {
+    func config(date: String, imageURL: String, likeImage: String, numberRow: Int) {
         dateLabel.text = date
-        cellImageView.image = UIImage(named: image)
         likeButton.setImage(UIImage(named: likeImage), for: .normal)
+        downloadImage(at: imageURL, numberRow: numberRow)
+    }
+    
+    func setIsLiked(isLiked: Bool) {
+        let likeImage: String = isLiked ? "IsLike" : "NoLike"
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.likeButton.setImage(UIImage(named: likeImage), for: .normal)
+        }
     }
     
     override func prepareForReuse() {
-        cellImageView.image = nil
+        cellImageView.kf.cancelDownloadTask()
         dateLabel.text = nil
         likeButton.imageView?.image = nil
     }
     
     @objc private func likeButtonTapped() {
-        // TODO: поставить лайк
+        delegate?.imageListCellDidTapeLike(self)
+    }
+    
+    private func downloadImage(at url: String, numberRow: Int) {
+        guard let url = URL(string: url) else { return }
+        cellImageView.kf.indicatorType = .activity
+        cellImageView.kf.setImage(with: url, placeholder: UIImage(named: "Stub"), options: nil) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let value):
+                self.cellImageView.image = value.image
+                self.delegate?.reloadCellHeight(numberRow: numberRow)
+            case .failure(_):
+                self.cellImageView.image = UIImage(named: "Stub")
+            }
+        }
     }
 }
