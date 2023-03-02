@@ -29,7 +29,7 @@ final class ImagesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-//        imageListService.fetchPhotosNextPage()
+        imageListService.fetchPhotosNextPage()
         
         imageListServiceObserver = NotificationCenter.default
             .addObserver(forName: ImageListService.didChangeNotification,
