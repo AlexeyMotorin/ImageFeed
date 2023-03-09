@@ -21,6 +21,8 @@
 		5B54BD16299E49D8004B5B79 /* WebViewControllerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B54BD15299E49D8004B5B79 /* WebViewControllerScreen.swift */; };
 		5B54BD1A299E57A0004B5B79 /* SingleImageViewControllerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B54BD19299E57A0004B5B79 /* SingleImageViewControllerScreen.swift */; };
 		5B61395F29B9D13D0080CCE2 /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B61395E29B9D13D0080CCE2 /* WebViewPresenter.swift */; };
+		5B61396129BA413C0080CCE2 /* AuthHelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B61396029BA413C0080CCE2 /* AuthHelperProtocol.swift */; };
+		5B61396329BA419B0080CCE2 /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B61396229BA419B0080CCE2 /* AuthHelper.swift */; };
 		5B6502AE29A9F1DC00FF2479 /* LoadImageErrorAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6502AD29A9F1DC00FF2479 /* LoadImageErrorAlertPresenter.swift */; };
 		5B6502B029A9F2B300FF2479 /* LoadImageErrorAlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6502AF29A9F2B300FF2479 /* LoadImageErrorAlertProtocol.swift */; };
 		5B6502B529A9FF0500FF2479 /* LogoutAlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6502B429A9FF0500FF2479 /* LogoutAlertModel.swift */; };
@@ -76,6 +78,8 @@
 		5B54BD15299E49D8004B5B79 /* WebViewControllerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerScreen.swift; sourceTree = "<group>"; };
 		5B54BD19299E57A0004B5B79 /* SingleImageViewControllerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewControllerScreen.swift; sourceTree = "<group>"; };
 		5B61395E29B9D13D0080CCE2 /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
+		5B61396029BA413C0080CCE2 /* AuthHelperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelperProtocol.swift; sourceTree = "<group>"; };
+		5B61396229BA419B0080CCE2 /* AuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
 		5B6502AD29A9F1DC00FF2479 /* LoadImageErrorAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageErrorAlertPresenter.swift; sourceTree = "<group>"; };
 		5B6502AF29A9F2B300FF2479 /* LoadImageErrorAlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageErrorAlertProtocol.swift; sourceTree = "<group>"; };
 		5B6502B429A9FF0500FF2479 /* LogoutAlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutAlertModel.swift; sourceTree = "<group>"; };
@@ -176,6 +180,8 @@
 				5BE0A057298A4786008EA01F /* WebViewViewController.swift */,
 				5B54BD15299E49D8004B5B79 /* WebViewControllerScreen.swift */,
 				5B61395E29B9D13D0080CCE2 /* WebViewPresenter.swift */,
+				5B61396029BA413C0080CCE2 /* AuthHelperProtocol.swift */,
+				5B61396229BA419B0080CCE2 /* AuthHelper.swift */,
 			);
 			path = WebViewViewController;
 			sourceTree = "<group>";
@@ -568,6 +574,7 @@
 				5B6502B529A9FF0500FF2479 /* LogoutAlertModel.swift in Sources */,
 				5BF2D1FC296C76E400BD3EC5 /* SingleImageViewController.swift in Sources */,
 				5B54BD16299E49D8004B5B79 /* WebViewControllerScreen.swift in Sources */,
+				5B61396329BA419B0080CCE2 /* AuthHelper.swift in Sources */,
 				5B7F822F29537CA100BC9138 /* ImagesListCell.swift in Sources */,
 				5BF2D1FF296C82C000BD3EC5 /* SharingPresenter.swift in Sources */,
 				5B8CCDD329503B3F002E601E /* AppDelegate.swift in Sources */,
@@ -593,6 +600,7 @@
 				5B83C9A729A3567600533850 /* Photo.swift in Sources */,
 				5BE0A05E298A4AD6008EA01F /* OAuth2Service.swift in Sources */,
 				5BF1E313299AA59C00A0BA08 /* Profile.swift in Sources */,
+				5B61396129BA413C0080CCE2 /* AuthHelperProtocol.swift in Sources */,
 				5BF2D203296C830500BD3EC5 /* SharingPresenterDelegate.swift in Sources */,
 				5BE0A058298A4786008EA01F /* WebViewViewController.swift in Sources */,
 				5B61395F29B9D13D0080CCE2 /* WebViewPresenter.swift in Sources */,

@@ -73,7 +73,7 @@ final class ImageListService {
         var request = URLRequest.makeHTTPRequest(
             path: "/photos" + "?page=\(numberPage)",
             httpMethod: HttpMethods.get.rawValue,
-            baseURL: Constants.apiBaseURL)
+            baseURL: AuthConfiguration.standart.apiBaseURL)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }
@@ -134,7 +134,7 @@ extension ImageListService {
         var request = URLRequest.makeHTTPRequest(
             path: "/photos" + "/\(id)/like",
             httpMethod: httpMethod,
-            baseURL: Constants.apiBaseURL)
+            baseURL: AuthConfiguration.standart.apiBaseURL)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }
