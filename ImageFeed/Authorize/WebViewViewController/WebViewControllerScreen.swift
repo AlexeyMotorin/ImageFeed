@@ -44,7 +44,7 @@ final class WebViewControllerScreen: UIView {
              options: [],
              changeHandler: { [weak self] _, _ in
                  guard let self = self else { return }
-                 self.updateProgress()
+                 self.viewController?.presenter?.didUpdateProgressValue(self.webView.estimatedProgress)
              })
     }
     
@@ -57,14 +57,23 @@ final class WebViewControllerScreen: UIView {
         self.viewController = viewController
     }
     
+    // MARK: - Public methods
     func loadWebview(request: URLRequest) {
         webView.load(request)
         webView.navigationDelegate = self
     }
     
+    func setProgressValue(_ newValue: Float) {
+        progressView.progress = newValue
+    }
+    
     // MARK: - Private methods
-    private func addSabViews() {
+    func addSabViews() {
         addSubviews(webView, backButton, progressView)
+    }
+    
+    func setProgressHiden(_ isHidden: Bool) {
+        progressView.isHidden = isHidden
     }
     
     private func activateConstraint() {
@@ -84,12 +93,7 @@ final class WebViewControllerScreen: UIView {
             progressView.topAnchor.constraint(equalTo: backButton.topAnchor)
         ])
     }
-    
-    private func updateProgress() {
-        progressView.progress = Float(webView.estimatedProgress)
-        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
-    }
-    
+
     @objc private func didBackButtonTapped() {
         viewController?.dismissViewController()
     }
@@ -110,16 +114,8 @@ extension WebViewControllerScreen: WKNavigationDelegate {
     /// - Parameter navigationAction: navigationAction который получаем из метода (_ webView: , decidePolicyFor : , decisionHandler: ), получаем из него url, который разбираем на компоненты
     /// - Returns: нужный код для авторизации пользователя
     private func code(from navigationAction: WKNavigationAction) -> String? {
-        if
-            let url = navigationAction.request.url,
-            let urlComponents = URLComponents(string: url.absoluteString),
-            urlComponents.path == "/oauth/authorize/native",
-            let items = urlComponents.queryItems,
-            let codeItem = items.first(where: { $0.name == "code"})
-        {
-            return codeItem.value
-        } else {
-            return nil
-        }
+        guard let url = navigationAction.request.url else { return nil}
+        let code = viewController?.presenter?.code(from: url)
+        return code
     }
 }

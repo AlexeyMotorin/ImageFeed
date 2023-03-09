@@ -20,6 +20,7 @@
 		5B54BD13299E4699004B5B79 /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B54BD12299E4699004B5B79 /* UIViewController+extension.swift */; };
 		5B54BD16299E49D8004B5B79 /* WebViewControllerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B54BD15299E49D8004B5B79 /* WebViewControllerScreen.swift */; };
 		5B54BD1A299E57A0004B5B79 /* SingleImageViewControllerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B54BD19299E57A0004B5B79 /* SingleImageViewControllerScreen.swift */; };
+		5B61395F29B9D13D0080CCE2 /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B61395E29B9D13D0080CCE2 /* WebViewPresenter.swift */; };
 		5B6502AE29A9F1DC00FF2479 /* LoadImageErrorAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6502AD29A9F1DC00FF2479 /* LoadImageErrorAlertPresenter.swift */; };
 		5B6502B029A9F2B300FF2479 /* LoadImageErrorAlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6502AF29A9F2B300FF2479 /* LoadImageErrorAlertProtocol.swift */; };
 		5B6502B529A9FF0500FF2479 /* LogoutAlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6502B429A9FF0500FF2479 /* LogoutAlertModel.swift */; };
@@ -40,7 +41,7 @@
 		5BB39DF62950A13F009544A2 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB39DF52950A13F009544A2 /* UIColor+extension.swift */; };
 		5BC9864A2992282300998E33 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 5BC986492992282300998E33 /* ProgressHUD */; };
 		5BC9864D2992820500998E33 /* UIBlokingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC9864C2992820500998E33 /* UIBlokingProgressHUD.swift */; };
-		5BE0A053298A4132008EA01F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0A052298A4132008EA01F /* Constants.swift */; };
+		5BE0A053298A4132008EA01F /* AuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0A052298A4132008EA01F /* AuthConfiguration.swift */; };
 		5BE0A056298A44FF008EA01F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0A055298A44FF008EA01F /* AuthViewController.swift */; };
 		5BE0A058298A4786008EA01F /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0A057298A4786008EA01F /* WebViewViewController.swift */; };
 		5BE0A05B298A4A3C008EA01F /* OAuthTokenResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE0A05A298A4A3C008EA01F /* OAuthTokenResponseBody.swift */; };
@@ -74,6 +75,7 @@
 		5B54BD12299E4699004B5B79 /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 		5B54BD15299E49D8004B5B79 /* WebViewControllerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerScreen.swift; sourceTree = "<group>"; };
 		5B54BD19299E57A0004B5B79 /* SingleImageViewControllerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewControllerScreen.swift; sourceTree = "<group>"; };
+		5B61395E29B9D13D0080CCE2 /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
 		5B6502AD29A9F1DC00FF2479 /* LoadImageErrorAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageErrorAlertPresenter.swift; sourceTree = "<group>"; };
 		5B6502AF29A9F2B300FF2479 /* LoadImageErrorAlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageErrorAlertProtocol.swift; sourceTree = "<group>"; };
 		5B6502B429A9FF0500FF2479 /* LogoutAlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutAlertModel.swift; sourceTree = "<group>"; };
@@ -95,7 +97,7 @@
 		5B8CCDE029503B40002E601E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BB39DF52950A13F009544A2 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		5BC9864C2992820500998E33 /* UIBlokingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlokingProgressHUD.swift; sourceTree = "<group>"; };
-		5BE0A052298A4132008EA01F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		5BE0A052298A4132008EA01F /* AuthConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConfiguration.swift; sourceTree = "<group>"; };
 		5BE0A055298A44FF008EA01F /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		5BE0A057298A4786008EA01F /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		5BE0A05A298A4A3C008EA01F /* OAuthTokenResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBody.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			children = (
 				5BE0A057298A4786008EA01F /* WebViewViewController.swift */,
 				5B54BD15299E49D8004B5B79 /* WebViewControllerScreen.swift */,
+				5B61395E29B9D13D0080CCE2 /* WebViewPresenter.swift */,
 			);
 			path = WebViewViewController;
 			sourceTree = "<group>";
@@ -337,7 +340,7 @@
 				5B8CCDDB29503B40002E601E /* Assets.xcassets */,
 				5B8CCDE029503B40002E601E /* Info.plist */,
 				5B8CCDDD29503B40002E601E /* LaunchScreen.storyboard */,
-				5BE0A052298A4132008EA01F /* Constants.swift */,
+				5BE0A052298A4132008EA01F /* AuthConfiguration.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -580,7 +583,7 @@
 				5B6502B929A9FF8400FF2479 /* LogoutAlertPresenterProtocol.swift in Sources */,
 				5B6502B729A9FF3A00FF2479 /* LogoutAlertPresenterDelegate.swift in Sources */,
 				5BF2D1F8296C6F1D00BD3EC5 /* ProfileViewController.swift in Sources */,
-				5BE0A053298A4132008EA01F /* Constants.swift in Sources */,
+				5BE0A053298A4132008EA01F /* AuthConfiguration.swift in Sources */,
 				5BF2D201296C82EE00BD3EC5 /* SharingPresenterProtocol.swift in Sources */,
 				5BE0A067298A54C3008EA01F /* SplashViewController.swift in Sources */,
 				5BE0A064298A4D24008EA01F /* OAuth2TokenStorage.swift in Sources */,
@@ -592,6 +595,7 @@
 				5BF1E313299AA59C00A0BA08 /* Profile.swift in Sources */,
 				5BF2D203296C830500BD3EC5 /* SharingPresenterDelegate.swift in Sources */,
 				5BE0A058298A4786008EA01F /* WebViewViewController.swift in Sources */,
+				5B61395F29B9D13D0080CCE2 /* WebViewPresenter.swift in Sources */,
 				5B54BD0E299E3D79004B5B79 /* AuthViewControllerScreen.swift in Sources */,
 				5BE0A056298A44FF008EA01F /* AuthViewController.swift in Sources */,
 				5B08F374299CBC7F00DDA5ED /* AuthErrorAlertPresenterDelegate.swift in Sources */,

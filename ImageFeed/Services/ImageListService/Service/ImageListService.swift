@@ -85,7 +85,7 @@ final class ImageListService {
         
         if let dateString = result.createdAt {
             createdDate = ISO8601DateFormatter().date(from: dateString)
-        } 
+        }
         
         let photo = Photo(id: result.id,
                           size: imageSize,

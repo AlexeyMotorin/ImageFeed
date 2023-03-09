@@ -81,8 +81,8 @@ final class ProfileViewController: UIViewController {
     
     private func showAuthViewController() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid configuration")}
-        let tabBarVC = AuthViewController()
-        window.rootViewController = tabBarVC
+        let splashVC = SplashViewController()
+        window.rootViewController = splashVC
     }
     
     private func cleanCookies() {
