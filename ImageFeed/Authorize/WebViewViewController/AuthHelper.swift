@@ -30,7 +30,7 @@ final class AuthHelper: AuthHelperProtocol {
         return nil
     }
     
-    private func authURL() -> URL? {
+    func authURL() -> URL? {
         var urlComponents = URLComponents(string: configuration.unsplashAuthorizeURLString)!
 
         urlComponents.queryItems = [

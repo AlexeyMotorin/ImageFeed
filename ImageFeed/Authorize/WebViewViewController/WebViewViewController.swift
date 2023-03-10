@@ -8,6 +8,7 @@ protocol WebViewViewControllerDelegate: AnyObject {
 }
 
 protocol WebViewViewControllerProtocol: AnyObject {
+    var webviewScreen: WebViewViewProtocol? { get set}
     func dismissViewController()
     func getCode(code: String?)
 }
@@ -19,13 +20,15 @@ final class WebViewViewController: UIViewController {
     weak var delegate: WebViewViewControllerDelegate?
   
     // MARK: - Private properties
-    private var webviewScreen: WebViewView!
+    var webviewScreen: WebViewViewProtocol?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         webviewScreen = WebViewView(frame: .zero, viewController: self)
-        setScreenViewOnViewController(view: webviewScreen)
+        
+        guard let screenView = webviewScreen as? UIView else { return }
+        setScreenViewOnViewController(view: screenView)
     }
     
     // MARK: - Override methods
@@ -40,6 +43,7 @@ final class WebViewViewController: UIViewController {
 }
 
 extension WebViewViewController: WebViewViewControllerProtocol {
+  
     func getCode(code: String?) {
         guard let code = code else { return }
         delegate?.webViewViewController(self, didAuthenticateWithCode: code)
