@@ -53,10 +53,6 @@ extension AuthViewController: WebViewViewControllerDelegate {
 extension AuthViewController: AuthViewControllerProtocol {
     func showWebviewController() {
         let webviewController = WebViewViewController()
-        let authHelper = AuthHelper()
-        let webViewPresenter = WebViewPresenter(helper: authHelper)
-        webViewPresenter.view = webviewController
-        webviewController.presenter = webViewPresenter
         webviewController.delegate = self
         webviewController.modalPresentationStyle = .fullScreen
         present(webviewController, animated: true)

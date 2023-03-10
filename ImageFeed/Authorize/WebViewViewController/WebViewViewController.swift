@@ -8,11 +8,6 @@ protocol WebViewViewControllerDelegate: AnyObject {
 }
 
 protocol WebViewViewControllerProtocol: AnyObject {
-    var presenter: WebViewPresenterProtocol? { get set }
-    func load(request: URLRequest)
-    func setProgressValue(_ newValue: Float)
-    func setProgressHiden(_ isHidden: Bool)
-    
     func dismissViewController()
     func getCode(code: String?)
 }
@@ -22,18 +17,15 @@ final class WebViewViewController: UIViewController {
         
     // MARK: - Public properties
     weak var delegate: WebViewViewControllerDelegate?
-    var presenter: WebViewPresenterProtocol?
-    
+  
     // MARK: - Private properties
-    private var webviewScreen: WebViewControllerScreen!
+    private var webviewScreen: WebViewView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        webviewScreen = WebViewControllerScreen(viewController: self)
+        webviewScreen = WebViewView(frame: .zero, viewController: self)
         setScreenViewOnViewController(view: webviewScreen)
-
-        presenter?.viewDidLoad()
     }
     
     // MARK: - Override methods
@@ -48,18 +40,6 @@ final class WebViewViewController: UIViewController {
 }
 
 extension WebViewViewController: WebViewViewControllerProtocol {
-    func setProgressValue(_ newValue: Float) {
-        webviewScreen.setProgressValue(newValue)
-    }
-    
-    func setProgressHiden(_ isHidden: Bool) {
-        webviewScreen.setProgressHiden(isHidden)
-    }
-    
-    func load(request: URLRequest) {
-        webviewScreen.loadWebview(request: request)
-    }
-    
     func getCode(code: String?) {
         guard let code = code else { return }
         delegate?.webViewViewController(self, didAuthenticateWithCode: code)

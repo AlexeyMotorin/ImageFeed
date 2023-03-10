@@ -1,7 +1,7 @@
 import Foundation
 
-protocol WebViewPresenterProtocol {
-    var view: WebViewViewControllerProtocol? { get set }
+protocol WebViewPresenterProtocol: AnyObject {
+    var view: WebViewViewProtocol? { get set }
     func viewDidLoad()
     func didUpdateProgressValue(_ newValue: Double)
     func code(from url: URL) -> String?
@@ -9,15 +9,15 @@ protocol WebViewPresenterProtocol {
 
 /// WebView presenter
 final class WebViewPresenter {
-    var view: WebViewViewControllerProtocol?
-    let helper: AuthHelper
+    weak var view: WebViewViewProtocol?
+    let helper: AuthHelperProtocol
     
-    init(helper: AuthHelper) {
+    init(helper: AuthHelperProtocol) {
         self.helper = helper
     }
 }
 
-// MARK: WebViewPresenterProtocol, viewDidLoad
+// MARK: viewDidLoad
 extension WebViewPresenter: WebViewPresenterProtocol {
     func viewDidLoad() {
         guard let request = helper.authRequest() else {
@@ -29,7 +29,7 @@ extension WebViewPresenter: WebViewPresenterProtocol {
     }
 }
 
-// MARK: WebViewPresenterProtocol, UpdateProgress
+// MARK: UpdateProgress
 extension WebViewPresenter {
     func didUpdateProgressValue(_ newValue: Double) {
         let newProgressValue = Float(newValue)
@@ -44,7 +44,7 @@ extension WebViewPresenter {
     }
 }
 
-// MARK: WebViewPresenterProtocol, code
+// MARK: get code
 extension WebViewPresenter {
     func code(from url: URL) -> String? {
         helper.code(from: url)
