@@ -1,10 +1,16 @@
-
 import UIKit
-import Kingfisher
 
-final class ProfileScreenView: UIView {
+protocol ProfileViewProtocol: AnyObject {
+    var presenter: ProfilePresenterProtocol? { get set }
+    func updateProfile(from profile: Profile?)
+    func updateAvatar(_ image: UIImage)
+    func requestShowAlertGetAvatarError(alertModel: ErrorAlertModel)
+}
+
+final class ProfileView: UIView {
     
     weak var viewController: ProfileViewControllerProtocol?
+    var presenter: ProfilePresenterProtocol?
     
     // MARK: - UI object
     private lazy var stackView: UIStackView = {
@@ -79,10 +85,15 @@ final class ProfileScreenView: UIView {
     }()
     
     // MARK: - Initializers
-    override init(frame: CGRect) {
+    init(frame: CGRect, viewController: ProfileViewControllerProtocol) {
         super.init(frame: frame)
         self.backgroundColor = .ypBackground
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.viewController = viewController
+        let helper = ProfileHelper()
+        presenter = ProfilePresenter(helper: helper)
+        presenter?.view = self
+        presenter?.viewDidLoad()
         addSabViews()
         activateConstraint()
     }
@@ -91,32 +102,7 @@ final class ProfileScreenView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(viewController: ProfileViewControllerProtocol) {
-        self.init()
-        self.viewController = viewController
-    }
-    
-    // MARK: - Public methods
-    func updateProfile(from profile: Profile?) {
-        guard let profile else { return }
-        nameLabel.text = profile.name
-        loginNameLabel.text = profile.loginName
-        descriptionLabel.text = profile.bio
-    }
-    
-    func updateAvatar(_ url: URL) {
-        profileImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"), options: nil) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let value):
-                self.profileImageView.image = value.image
-                self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
-            case .failure(_):
-                self.viewController?.showAlertGetAvatarError()
-            }
-        }
-    }
-    
+
     // MARK: - Private methods
     private func addSabViews() {
         self.addSubview(stackView)
@@ -149,6 +135,26 @@ final class ProfileScreenView: UIView {
     }
     
     @objc private func didExitButtonTapped() {
-        viewController?.logoutProfile()
+        guard let alertModel = presenter?.creatLogoutAlert() else { return }
+        viewController?.logoutProfile(alertModel: alertModel)
+    }
+}
+
+// MARK: ProfileViewProtocol
+extension ProfileView: ProfileViewProtocol {
+    func updateAvatar(_ image: UIImage) {
+        profileImageView.image = image
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
+    }
+    
+    func requestShowAlertGetAvatarError(alertModel: ErrorAlertModel) {
+        self.viewController?.showAlertGetAvatarError(alertModel: alertModel)
+    }
+    
+    func updateProfile(from profile: Profile?) {
+        guard let profile else { return }
+        nameLabel.text = profile.name
+        loginNameLabel.text = profile.loginName
+        descriptionLabel.text = profile.bio
     }
 }
