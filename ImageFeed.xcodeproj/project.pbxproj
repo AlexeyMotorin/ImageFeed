@@ -51,6 +51,7 @@
 		5B9DE2A729BC7DE10049E383 /* ProfileViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9DE2A629BC7DE10049E383 /* ProfileViewTests.swift */; };
 		5B9DE2A929BC8DFE0049E383 /* ProfileHelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9DE2A829BC8DFE0049E383 /* ProfileHelperProtocol.swift */; };
 		5B9DE2AB29BC8E140049E383 /* ProfileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9DE2AA29BC8E140049E383 /* ProfileHelper.swift */; };
+		5B9DE2AD29BCAC0E0049E383 /* ImageListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9DE2AC29BCAC0E0049E383 /* ImageListPresenter.swift */; };
 		5BB39DF62950A13F009544A2 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB39DF52950A13F009544A2 /* UIColor+extension.swift */; };
 		5BC9864A2992282300998E33 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 5BC986492992282300998E33 /* ProgressHUD */; };
 		5BC9864D2992820500998E33 /* UIBlokingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC9864C2992820500998E33 /* UIBlokingProgressHUD.swift */; };
@@ -132,6 +133,7 @@
 		5B9DE2A629BC7DE10049E383 /* ProfileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTests.swift; sourceTree = "<group>"; };
 		5B9DE2A829BC8DFE0049E383 /* ProfileHelperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHelperProtocol.swift; sourceTree = "<group>"; };
 		5B9DE2AA29BC8E140049E383 /* ProfileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHelper.swift; sourceTree = "<group>"; };
+		5B9DE2AC29BCAC0E0049E383 /* ImageListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListPresenter.swift; sourceTree = "<group>"; };
 		5BB39DF52950A13F009544A2 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		5BC9864C2992820500998E33 /* UIBlokingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlokingProgressHUD.swift; sourceTree = "<group>"; };
 		5BE0A052298A4132008EA01F /* AuthConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConfiguration.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				5B8CCDD629503B3F002E601E /* ImagesListViewController.swift */,
+				5B9DE2AC29BCAC0E0049E383 /* ImageListPresenter.swift */,
 			);
 			path = ImageList;
 			sourceTree = "<group>";
@@ -726,6 +729,7 @@
 				5B61396129BA413C0080CCE2 /* AuthHelperProtocol.swift in Sources */,
 				5BF2D203296C830500BD3EC5 /* SharingPresenterDelegate.swift in Sources */,
 				5BE0A058298A4786008EA01F /* WebViewViewController.swift in Sources */,
+				5B9DE2AD29BCAC0E0049E383 /* ImageListPresenter.swift in Sources */,
 				5B61395F29B9D13D0080CCE2 /* WebViewPresenter.swift in Sources */,
 				5B54BD0E299E3D79004B5B79 /* AuthViewControllerScreen.swift in Sources */,
 				5BE0A056298A44FF008EA01F /* AuthViewController.swift in Sources */,

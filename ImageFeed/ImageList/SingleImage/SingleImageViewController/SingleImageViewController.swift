@@ -49,10 +49,6 @@ final class SingleImageViewController: UIViewController {
     
         alertPresenter?.requestShowErrorLoadImageAlert(alertModel: alertModel)
     }
-    
-    deinit {
-        print("deinit")
-    }
 }
 
 // MARK: - SharingPresenterDelegate
@@ -77,7 +73,6 @@ extension SingleImageViewController: SingleImageViewControllerProtocol {
     func showAlertLoadImageError() {
         showImageErrorAlert()
     }
-    
     
     func dismissViewController() {
         dismiss(animated: true)
