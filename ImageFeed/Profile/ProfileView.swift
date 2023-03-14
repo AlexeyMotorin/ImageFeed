@@ -56,6 +56,7 @@ final class ProfileView: UIView {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "Exit"), for: .normal)
+        button.accessibilityIdentifier = "logout button"
         button.addTarget(self, action: #selector(didExitButtonTapped), for: .touchUpInside)
         return button
     }()

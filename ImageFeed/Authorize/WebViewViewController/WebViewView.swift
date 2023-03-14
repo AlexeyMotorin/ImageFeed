@@ -23,6 +23,7 @@ final class WebViewView: UIView {
         let webView = WKWebView()
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.backgroundColor = .ypWhite
+        webView.accessibilityIdentifier = "UsplashWebView"
         return webView
     }()
     

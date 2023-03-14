@@ -68,6 +68,10 @@ final class ImageListService {
         task.resume()
     }
     
+    func cleanPhotos() {
+        photos = []
+    }
+    
     // MARK: - Private methods
     private func imageListRequest(numberPage: Int, token: String) -> URLRequest {
         var request = URLRequest.makeHTTPRequest(
@@ -80,7 +84,6 @@ final class ImageListService {
     
     private func getPhoto(from result: PhotoResult) -> Photo {
         let imageSize = CGSize(width: CGFloat(result.width), height: CGFloat(result.height))
-        
         var createdDate: Date?
         
         if let dateString = result.createdAt {

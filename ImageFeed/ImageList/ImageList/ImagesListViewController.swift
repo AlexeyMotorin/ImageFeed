@@ -17,6 +17,7 @@ final class ImagesListViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.accessibilityIdentifier = "Image list"
         tableView.register(ImagesListCell.self, forCellReuseIdentifier: ImagesListCell.reuseIdentifier)
         tableView.backgroundColor = .clear
         return tableView
@@ -56,7 +57,6 @@ final class ImagesListViewController: UIViewController {
 
 // MARK: ImageListViewControllerProtocol
 extension ImagesListViewController: ImageListViewControllerProtocol {
-    
     func getCellIndexPath(cell: UITableViewCell) -> IndexPath? {
         guard let indexPath = tableView.indexPath(for: cell) else { return nil }
         return indexPath

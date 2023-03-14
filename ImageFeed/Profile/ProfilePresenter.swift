@@ -80,6 +80,7 @@ extension ProfilePresenter {
                 OAuth2TokenStorage.shared.removeToken()
                 self.cleanCookies()
                 self.showAuthViewController()
+                ImageListService.shared.cleanPhotos()
                 UIBlockingProgressHUD.dismiss()
             }
         return alertModel
