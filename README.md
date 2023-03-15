@@ -18,6 +18,6 @@
 * Delegate, KVO, Notofocation center
 * SplashScreen
 * Верстка кодом 
-* 
+* Unit/UI тесты 
 
-Unit/UI тесты ![screens](https://user-images.githubusercontent.com/97784424/225261987-3fa9a567-b8b2-4933-aaba-e10ac04fcffa.jpg)
+![screens](https://user-images.githubusercontent.com/97784424/225261987-3fa9a567-b8b2-4933-aaba-e10ac04fcffa.jpg)
