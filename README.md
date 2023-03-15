@@ -15,7 +15,7 @@
 * В приложении использованы UImageView, UIButton, UILabel, TabBarController, NavigationController, NavigationBar, UITableView, UITableViewCell, WebView.
 * Работа с сетью, API Unsplash (GET, POST, DELETE запросы)
 * Работа в многопоточной среде (GCD)
-* Delegate, KVO, Notofocation center
+* Delegate, KVO, Notification center
 * SplashScreen
 * Верстка кодом 
 * Unit/UI тесты 
