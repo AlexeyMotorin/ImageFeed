@@ -99,8 +99,9 @@ final class ImageFeedUITests: XCTestCase {
         // Перейти на экран профиля
         app.tabBars.buttons.element(boundBy: 1).tap()
         // Проверить что на нем отображаются ваши персональные данные
-        XCTAssertTrue(app.staticTexts["Alexey Motorin"].exists)
-        XCTAssertTrue(app.staticTexts["@alexeymotorin"].exists)
+        // TODO: Name Last name, @username
+        XCTAssertTrue(app.staticTexts["??????????"].exists)
+        XCTAssertTrue(app.staticTexts["@?????????"].exists)
         // Нажать кнопку логаута
         app.buttons["logout button"].tap()
         // Проверить что открылся экран авторизации

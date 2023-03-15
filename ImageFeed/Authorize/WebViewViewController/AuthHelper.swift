@@ -3,7 +3,7 @@ import Foundation
 /// Класс создает request и code для авторизации
 final class AuthHelper: AuthHelperProtocol {
     
-    let configuration: AuthConfiguration
+    private let configuration: AuthConfiguration
     
     private struct AuthHelperConstants {
         static let responseType = "code"
@@ -13,7 +13,7 @@ final class AuthHelper: AuthHelperProtocol {
         self.configuration = configuration
     }
     
-    func authRequest() -> URLRequest? {
+    var authRequest: URLRequest? {
         guard let url = authURL() else { return nil }
         return URLRequest(url: url)
     }

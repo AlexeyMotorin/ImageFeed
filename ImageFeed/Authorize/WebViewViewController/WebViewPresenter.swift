@@ -20,7 +20,7 @@ final class WebViewPresenter {
 // MARK: viewDidLoad
 extension WebViewPresenter: WebViewPresenterProtocol {
     func viewDidLoad() {
-        guard let request = helper.authRequest() else {
+        guard let request = helper.authRequest else {
             assertionFailure("Ошибка запроса для авторизации")
             return
         }

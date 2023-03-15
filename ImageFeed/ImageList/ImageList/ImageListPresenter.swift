@@ -1,4 +1,3 @@
-
 import UIKit
 
 protocol ImageListPresenterProtocol: AnyObject {
@@ -7,7 +6,10 @@ protocol ImageListPresenterProtocol: AnyObject {
 }
 
 final class ImageListPresenter: NSObject {
+    // MARK: - Public properties
     weak var view: ImageListViewControllerProtocol?
+    
+    // MARK: - Private properties    
     private var photos: [Photo] = []
     private let imageListService = ImageListService.shared
     private var imageListServiceObserver: NSObjectProtocol?
@@ -22,6 +24,7 @@ final class ImageListPresenter: NSObject {
 
 // MARK: ImageListPresenterProtocol
 extension ImageListPresenter: ImageListPresenterProtocol {
+    // MARK: - Public methods
     func viewDidLoad() {
         imageListService.fetchPhotosNextPage()
         
@@ -121,11 +124,11 @@ extension ImageListPresenter: ImagesListCellDelegate {
             case .success:
                 self.photos = self.imageListService.photos
                 cell.setIsLiked(isLiked: self.photos[indexPath.row].isLiked)
-                UIBlockingProgressHUD.dismiss()
             case .failure(let failure):
                 print(failure)
-                UIBlockingProgressHUD.dismiss()
+                
             }
+            UIBlockingProgressHUD.dismiss()
         }
     }
     
