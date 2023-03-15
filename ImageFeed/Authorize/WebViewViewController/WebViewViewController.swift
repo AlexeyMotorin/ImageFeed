@@ -8,8 +8,9 @@ protocol WebViewViewControllerDelegate: AnyObject {
 }
 
 protocol WebViewViewControllerProtocol: AnyObject {
+    var webviewScreen: WebViewViewProtocol? { get set}
     func dismissViewController()
-    func getCode(code: String)
+    func getCode(code: String?)
 }
 
 /// Класс отвечает за отображение окна для авторизации пользователя и перехвата параметра code необходимого для авторизации пользователя
@@ -17,29 +18,17 @@ final class WebViewViewController: UIViewController {
         
     // MARK: - Public properties
     weak var delegate: WebViewViewControllerDelegate?
-    
-    // MARK: - Constants
-    private struct WebViewConstants {
-        static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-        static let responseType = "code"
-    }
-    
+  
     // MARK: - Private properties
-    
-    private var webviewScreen: WebViewControllerScreen!
+    var webviewScreen: WebViewViewProtocol?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        webviewScreen = WebViewControllerScreen(viewController: self)
-        setScreenViewOnViewController(view: webviewScreen)
+        webviewScreen = WebViewView(frame: .zero, viewController: self)
         
-        guard let request = createRequest() else {
-            assertionFailure("Ошибка запроса для авторизации")
-            return
-        }
-        
-        webviewScreen.loadWebview(request: request)
+        guard let screenView = webviewScreen as? UIView else { return }
+        setScreenViewOnViewController(view: screenView)
     }
     
     // MARK: - Override methods
@@ -51,37 +40,12 @@ final class WebViewViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .darkContent
     }
-            
-    // MARK: - Private methods
-
-    
-    private func createRequest() -> URLRequest? {
-        var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString)!
-        
-        urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: Constants.accessKey),
-            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
-            URLQueryItem(name: "response_type", value: WebViewConstants.responseType),
-            URLQueryItem(name: "scope", value: Constants.accessScope)
-        ]
-        
-        guard let url = urlComponents.url else { return nil }
-        let request = URLRequest(url: url)
-        return request
-    }
-    
-    deinit {
-       print("WebViewViewController deinit")
-    }
-}
-
-// MARK: - WKNavigationDelegate
-extension WebViewViewController: WKNavigationDelegate {
- 
 }
 
 extension WebViewViewController: WebViewViewControllerProtocol {
-    func getCode(code: String) {
+  
+    func getCode(code: String?) {
+        guard let code = code else { return }
         delegate?.webViewViewController(self, didAuthenticateWithCode: code)
     }
     

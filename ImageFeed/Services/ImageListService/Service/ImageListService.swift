@@ -68,24 +68,27 @@ final class ImageListService {
         task.resume()
     }
     
+    func cleanPhotos() {
+        photos = []
+    }
+    
     // MARK: - Private methods
     private func imageListRequest(numberPage: Int, token: String) -> URLRequest {
         var request = URLRequest.makeHTTPRequest(
             path: "/photos" + "?page=\(numberPage)",
             httpMethod: HttpMethods.get.rawValue,
-            baseURL: Constants.apiBaseURL)
+            baseURL: AuthConfiguration.standart.apiBaseURL)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }
     
     private func getPhoto(from result: PhotoResult) -> Photo {
         let imageSize = CGSize(width: CGFloat(result.width), height: CGFloat(result.height))
-        
         var createdDate: Date?
         
         if let dateString = result.createdAt {
             createdDate = ISO8601DateFormatter().date(from: dateString)
-        } 
+        }
         
         let photo = Photo(id: result.id,
                           size: imageSize,
@@ -134,7 +137,7 @@ extension ImageListService {
         var request = URLRequest.makeHTTPRequest(
             path: "/photos" + "/\(id)/like",
             httpMethod: httpMethod,
-            baseURL: Constants.apiBaseURL)
+            baseURL: AuthConfiguration.standart.apiBaseURL)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }

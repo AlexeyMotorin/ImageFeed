@@ -24,6 +24,7 @@ final class AuthViewControllerScreen: UIView {
         button.layer.cornerRadius = 16
         button.layer.masksToBounds = true
         button.addTarget(self, action: #selector(didAuthButtonTapped), for: .touchUpInside)
+        button.accessibilityIdentifier = "Authenticate"
         return button
     }()
     
